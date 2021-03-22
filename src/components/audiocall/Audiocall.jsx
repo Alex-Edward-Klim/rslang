@@ -59,7 +59,11 @@ const Audiocall = () => {
   }
 
   const sayWord = (wordID) => {
-    const currentWord = wordList.find(el => el.id === wordID);
+    let currentWord = null
+    if (wordID) {
+      currentWord = wordList.find(el => el.id === wordID);
+    }
+    console.log(currentWord)
   }
 
   useEffect(() => {
@@ -74,6 +78,7 @@ const Audiocall = () => {
     renderGame();
   }, [wordList])
 
+  // TODO: implement 
   useEffect(() => {
     if (wordList) {
       if (wordList.length < 20) {
@@ -93,8 +98,6 @@ const Audiocall = () => {
     </li>)
   })
 
-  console.log(currentOptions)
-
   return (
     <>
       <header className="audiocall__header">
@@ -111,6 +114,7 @@ const Audiocall = () => {
             src={soundBtn}
             alt="sound btn"
           />
+          <div className="audiocall__sound__animation"></div>
         </div>
         <ul className="audiocall__option-list">
           {optionList}
