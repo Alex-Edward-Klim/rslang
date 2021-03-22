@@ -1,0 +1,82 @@
+/* temporarily */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.audiocall {
+    width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    font-size: 24px;
+    color: #00037E;
+    justify-content: center;
+    height: 90vh;
+}
+.audiocall__header {
+    width: 1000px;
+    margin: 0 auto;
+    height: 10vh;
+    display: flex;
+    justify-content: flex-end;
+}
+.audiocall__header__btn {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    padding: 15px;
+    margin: 15px;
+    /* float: right; */
+}
+.audiocall__sound {
+    margin: 0 auto;
+    width: 134px;
+    height: 134px;
+    background: #ECECEE;
+    border-radius: 50%;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.audiocall__sound__img {
+    width: 104px;
+}
+.audiocall__option-list {
+    display: flex;
+    justify-content: center;
+    margin: 114px 0px 114px;
+}
+.audiocall__option-list li + li {
+    margin-left: 65px;
+}
+.audiocall__option-list__item {
+    padding: 16px;
+    cursor: pointer;
+    /* temporarily */
+    list-style-type: none;
+}
+.audiocall__option-list__item:hover {
+    background: #ECECEE;
+    transition: .5s ease-out;
+}
+.audiocall__skip-btn {
+    margin: 0 auto;
+    border: 1px solid #00037E;
+    border-radius: 15px;
+    text-align: center;
+
+    cursor: pointer;
+}
+.audiocall__skip-btn:hover {
+    background: #00037E;
+    border: 1px solid #00037E;
+    color: #F8FBFE;
+    transition: .2s ease-out;
+}
+.audiocall__skip-btn__value {
+    padding: 16px 46px;
+}
