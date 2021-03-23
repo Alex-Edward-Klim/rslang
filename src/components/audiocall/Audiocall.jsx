@@ -2,21 +2,24 @@ import "./audiocall.css";
 import soundBtn from "../../images/icons/volume.svg";
 import closeBtn from "../../images/icons/close.svg";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
 const Audiocall = () => {
   //TODO: get URL from props
-  const url = "https://react-learnwords-example.herokuapp.com/words";
+  const apiUrl = "https://react-learnwords-example.herokuapp.com"
+  const wordListUrl = "https://react-learnwords-example.herokuapp.com/words";
 
   const [wordList, setWordList] = useState();
   const [currentRound, setCurrentRound] = useState(1);
   const [rigthAnswerID, setRigthAnswerID] = useState();
+  const [rigthAnswer, setRigthAnswer] = useState();
   const [usedID, setUsedID] = useState([]);
   const [currentOptions, setCurrentOptions] = useState([]);
-  // 
-  const [isLoaded, setIsLoaded] = useState(false);
-// 
+
+  const soundBtnBg = useRef(null);
+  const audioPlayer = useRef(null);
+
   const shuffle = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -28,6 +31,13 @@ const Audiocall = () => {
 
   const endGame = () => {
     console.log("Игра закончилась!")
+  }
+
+  const addAnimation = (element, elementClass, delay) => {
+    element.current.classList.add(elementClass);
+    setTimeout(() => {
+      element.current.classList.remove(elementClass);
+    }, delay);
   }
 
   const renderGame = () => {
@@ -43,10 +53,9 @@ const Audiocall = () => {
     const rigthOption = currentWordList[0];
 
     const rigthOptionID = rigthOption.id;
-    setRigthAnswerID(rigthOptionID);
+    // setRigthAnswerID(rigthOptionID);
+    setRigthAnswer(rigthOption);
     
-    sayWord(rigthOptionID);
-
     currentOptions.push(wordList.find(el => el.id === rigthOptionID));
 
     for (let i = 1; i < 5; i++) {
@@ -56,19 +65,34 @@ const Audiocall = () => {
     setCurrentOptions(shuffle(currentOptions))
 
     usedID.push(rigthOptionID)
+    setUsedID(usedID)
   }
 
-  const sayWord = (wordID) => {
-    let currentWord = null
-    if (wordID) {
-      currentWord = wordList.find(el => el.id === wordID);
+  const sayWord = () => {
+    if (!rigthAnswer) {
+      return
     }
-    console.log(currentWord)
+
+    const currentWord = wordList.find(el => el.id === rigthAnswer.id);
+
+    const soundUrl = `${apiUrl}/${currentWord.audio}`;
+
+    audioPlayer.current.src = soundUrl;
+    audioPlayer.current.autoPlay = true;
+
+    setTimeout(() => {
+      audioPlayer.current.play();
+    }, 500);
+
+    const animationClass =  'audiocall__sound__animation__active';
+    const animationDelay = 3000;
+
+    addAnimation(soundBtnBg, animationClass, animationDelay);
   }
 
   useEffect(() => {
-    const apiUrl = url;
-    axios.get(apiUrl).then((resp) => {
+    const currentUrl = wordListUrl;
+    axios.get(currentUrl).then((resp) => {
       const allWords = resp.data;
       setWordList(allWords);
     });
@@ -77,6 +101,10 @@ const Audiocall = () => {
   useEffect(() => {
     renderGame();
   }, [wordList])
+
+  useEffect(() => {
+    sayWord()
+  }, [rigthAnswer])
 
   // TODO: implement 
   useEffect(() => {
@@ -114,11 +142,11 @@ const Audiocall = () => {
             src={soundBtn}
             alt="sound btn"
           />
-          <div className="audiocall__sound__animation"></div>
+          {/* TODO: вставить аргумент в сейворд или найти слово, если функция вызывается из онклик */}
+          <div className="audiocall__sound__animation"  ref={soundBtnBg} onClick={sayWord}></div>
+          <audio ref={audioPlayer} />
         </div>
-        <ul className="audiocall__option-list">
-          {optionList}
-        </ul>
+        <ul className="audiocall__option-list">{optionList}</ul>
         <div className="audiocall__skip-btn">
           <p className="audiocall__skip-btn__value">Не знаю</p>
         </div>
