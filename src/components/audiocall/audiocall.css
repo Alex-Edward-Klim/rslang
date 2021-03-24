@@ -4,8 +4,13 @@
     margin: 0;
     padding: 0;
 }
-
+/*  */
 .audiocall {
+    display: flex;
+    align-items: center;
+    /* height: 90vh; */
+}
+.audiocall__container {
     width: 1140px;
     margin: 0 auto;
     display: flex;
@@ -13,7 +18,13 @@
     font-size: 24px;
     color: #00037E;
     justify-content: center;
-    height: 90vh;
+
+    border: 2px solid #00037E;
+    border-radius: 30px;
+
+    width: 1140px;
+    margin-top: 15px;
+    padding: 60px 40px ;
 }
 .audiocall__leave {
     animation: leave  1s;
@@ -38,8 +49,22 @@
     margin: 15px;
     /* float: right; */
 }
+
+.audiocall__mid-content {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.audiocall__mid-content__img {
+    width: 138px;
+    height: 138px;
+    border-radius: 50%;
+}
+.audiocall__mid-content__word {
+    font-size: 50px;
+    padding: 0 16px;
+}
 .audiocall__sound {
-    margin: 0 auto;
     width: 134px;
     height: 134px;
     background: #ECECEE;
@@ -49,6 +74,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+/*  */
+.audiocall__sound__checked{
+    width: 69px;
+    height: 69px;
 }
 .audiocall__sound__animation {
     content: "";
@@ -60,6 +90,11 @@
     border-radius: 50%;
     border: 10px solid transparent;
 }
+/*  */
+.audiocall__sound__animation__checked {
+    width: 69px;
+    height: 69px;
+}
 .audiocall__sound__animation__active {
     animation: sound  3s;
     animation-iteration-count: 1;
@@ -67,10 +102,18 @@
 .audiocall__sound__img {
     width: 104px;
 }
+/*  */
+.audiocall__sound__img__checked {
+    width: 54px;
+}
 .audiocall__option-list {
     display: flex;
     justify-content: center;
-    margin: 114px 0px 114px;
+    margin: 50px 0px;
+}
+.audiocall__option-list__item {
+    display: flex;
+    align-items: center;
 }
 .audiocall__option-list li + li {
     margin-left: 65px;
@@ -84,6 +127,15 @@
 .audiocall__option-list__item:hover {
     background: #ECECEE;
     transition: .5s ease-out;
+}
+.audiocall__option-list__item__number {
+    font-size: 21px;
+}
+.audiocall__option-list__item__off {
+    display: none;
+}
+.audiocall__option-list__item__content {
+    padding-left: 8px;
 }
 .audiocall__skip-btn {
     margin: 0 auto;
