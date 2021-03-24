@@ -8,7 +8,6 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 // TODO: если не авторизован, хранить результат игры в локал сторейдж, если авторизован пост запрос при каждом ответе.
-// TODO: добавить звук при верном и не верном ответе.
 
 const Audiocall = () => {
   //TODO: get URL from props
@@ -24,6 +23,7 @@ const Audiocall = () => {
   const [isWordChecked, setIsWordChecked] = useState(false);
   const [rigthAnswerImgSrc, setRigthAnswerImgSrc] = useState("");
 
+  const gameArea = useRef(null);
   const soundBtnBg = useRef(null);
   const audioPlayer = useRef(null);
   const optionListRef = useRef(null);
@@ -127,8 +127,6 @@ const Audiocall = () => {
       wrongAnswerImg.classList.remove("audiocall__option-list__item__off");
       numberOfWord.classList.add("audiocall__option-list__item__off");
 
-      //TODO: add check true answer
-
       // TODO: post request to server +1 wrong answer
     }
 
@@ -162,11 +160,16 @@ const Audiocall = () => {
       el.children[1].classList.add("audiocall__option-list__item__off");
       el.children[2].classList.remove("audiocall__option-list__item__off");
     }
+    
+    gameArea.current.classList.remove("audiocall__come")
+    gameArea.current.classList.add("audiocall__leave")
 
-    setIsWordChecked(false);
+    setTimeout(() => {
+      gameArea.current.classList.remove("audiocall__leave")
+      gameArea.current.classList.add("audiocall__come")
+      setIsWordChecked(false);
+    }, 300);
 
-    // стиль leave панели добавить
-    // стиль come панели добавить
     setCurrentRound(currentRound + 1);
     console.log(currentRound)
   }
@@ -252,7 +255,7 @@ const Audiocall = () => {
           onClick={closeGame}
         />
       </header>
-      <main className="audiocall">
+      <main className="audiocall" ref={gameArea}>
         <div className="audiocall__container">
           <div className="audiocall__mid-content">
             {isWordChecked && rigthAnswerImg}

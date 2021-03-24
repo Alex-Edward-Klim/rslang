@@ -27,11 +27,11 @@
     padding: 60px 40px ;
 }
 .audiocall__leave {
-    animation: leave  1s;
+    animation: leave  0.5s;
     animation-iteration-count: 1;
 }
 .audiocall__come {
-    animation: come  1s;
+    animation: come  0.5s;
     animation-iteration-count: 1;
 }
 .audiocall__header {
@@ -162,7 +162,7 @@
 
     100% {
         opacity: 0;
-        transform: translate(-300px);
+        transform: translate(-1000px);
     }
 }
 
