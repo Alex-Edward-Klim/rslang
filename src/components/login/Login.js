@@ -58,6 +58,7 @@ const Login = () => {
           <label htmlFor="userEmail">Электронная Почта:</label>
           <input
             type="email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{1,}$"
             id="userEmail"
             required
             value={userEmail}
