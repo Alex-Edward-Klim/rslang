@@ -16,7 +16,7 @@ const Audiocall = () => {
   const wordListUrl = "https://react-learnwords-example.herokuapp.com/words";
 
   const [wordList, setWordList] = useState();
-  const [currentRound, setCurrentRound] = useState(1);
+  const [currentRound, setCurrentRound] = useState(0);
   // const [rigthAnswerID, setRigthAnswerID] = useState();
   const [rigthAnswer, setRigthAnswer] = useState();
   const [usedID, setUsedID] = useState([]);
@@ -26,6 +26,7 @@ const Audiocall = () => {
 
   const soundBtnBg = useRef(null);
   const audioPlayer = useRef(null);
+  const optionListRef = useRef(null);
 
   const shuffle = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -67,13 +68,15 @@ const Audiocall = () => {
     // setRigthAnswerID(rigthOptionID);
     setRigthAnswer(rigthOption);
 
-    currentOptions.push(wordList.find((el) => el.id === rigthOptionID));
+    const localCurrentOptions = []
+
+    localCurrentOptions.push(wordList.find((el) => el.id === rigthOptionID));
 
     for (let i = 1; i < 5; i++) {
-      currentOptions.push(currentWordList[i]);
+      localCurrentOptions.push(currentWordList[i]);
     }
 
-    setCurrentOptions(shuffle(currentOptions));
+    setCurrentOptions(shuffle(localCurrentOptions));
 
     usedID.push(rigthOptionID);
     setUsedID(usedID);
@@ -102,43 +105,72 @@ const Audiocall = () => {
   };
 
   const checkWord = (e) => {
+    // TODO: добавить проверку слов с нажатий клавиш клаиваиутры
+
     const rigthAnswerID = rigthAnswer.id;
-    const selecedtWordID = e.currentTarget.id;
 
-    const rigthAnswerImg = e.currentTarget.children[0];
-    const wrongAnswerImg = e.currentTarget.children[1];
-    const numberOfWord = e.currentTarget.children[2];
-
-    if (rigthAnswerID === selecedtWordID) {
-      rigthAnswerImg.classList.remove("audiocall__option-list__item__off");
+    if (e.currentTarget.id === rigthAnswerID) {
       console.log("ВЕРНО");
 
-
-
-
       // TODO: post request to server +1 rigth answer
+    } else if (e.currentTarget.innerHTML === "Не знаю") {
+
+      console.log("не знаю")
+      // TODO: post request to server +1 wrong answer
     } else {
+
       console.log(" НЕ ВЕРНО");
+
+      const wrongAnswerImg = e.currentTarget.children[1];
+      const numberOfWord = e.currentTarget.children[2];
+
       wrongAnswerImg.classList.remove("audiocall__option-list__item__off");
-
-
+      numberOfWord.classList.add("audiocall__option-list__item__off");
 
       //TODO: add check true answer
 
-
       // TODO: post request to server +1 wrong answer
     }
-    numberOfWord.classList.add("audiocall__option-list__item__off");
+
+    const currentOptionList = optionListRef.current.childNodes;
+
+    let rigthAnswerNode;
+
+    for (let i = 0; i < currentOptionList.length; i++) {
+      if (currentOptionList[i].id === rigthAnswerID) {
+        rigthAnswerNode = currentOptionList[i];
+      }
+    }
+
+    rigthAnswerNode.children[0].classList.remove("audiocall__option-list__item__off");
+    rigthAnswerNode.children[2].classList.add("audiocall__option-list__item__off");
+
+
     const rigthAnswerImgUrl = `${apiUrl}/${rigthAnswer.image}`;
 
     setRigthAnswerImgSrc(rigthAnswerImgUrl)
-    console.log(rigthAnswerImgUrl)
 
     setIsWordChecked(true);
-
-
-    // +1 количество слов
   };
+
+  const nextWord = () => {
+    const currentOptionList = optionListRef.current.childNodes;
+
+    for (let i = 0; i < currentOptionList.length; i++) {
+      const el = currentOptionList[i];
+      el.children[0].classList.add("audiocall__option-list__item__off");
+      el.children[1].classList.add("audiocall__option-list__item__off");
+      el.children[2].classList.remove("audiocall__option-list__item__off");
+    }
+
+    setIsWordChecked(false);
+
+    // стиль leave панели добавить
+    // стиль come панели добавить
+    setCurrentRound(currentRound + 1);
+    console.log(currentRound)
+  }
+
   useEffect(() => {
     const currentUrl = wordListUrl;
     axios.get(currentUrl).then((resp) => {
@@ -149,7 +181,7 @@ const Audiocall = () => {
 
   useEffect(() => {
     renderGame();
-  }, [wordList]);
+  }, [wordList, currentRound]);
 
   useEffect(() => {
     sayWord();
@@ -198,6 +230,18 @@ const Audiocall = () => {
     className="audiocall__mid-content__img"
   />;
 
+  const skipBtn = (
+    <p className="audiocall__skip-btn__value" onClick={checkWord}>
+      Не знаю
+    </p>
+  );
+  const nextBtn = (
+    <p className="audiocall__skip-btn__value" onClick={nextWord}>
+      Далее
+    </p>
+  );
+
+
   return (
     <>
       <header className="audiocall__header">
@@ -227,9 +271,9 @@ const Audiocall = () => {
               <audio ref={audioPlayer} />
             </div>
           </div>
-          <ul className="audiocall__option-list">{optionList}</ul>
+          <ul className="audiocall__option-list" ref={optionListRef}>{optionList}</ul>
           <div className="audiocall__skip-btn">
-            <p className="audiocall__skip-btn__value"> {isWordChecked ? "Далее" : "Не знаю"} </p>
+            {isWordChecked ? nextBtn : skipBtn}
           </div>
         </div>
       </main>
