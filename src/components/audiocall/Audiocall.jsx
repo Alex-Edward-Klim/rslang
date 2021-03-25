@@ -42,6 +42,7 @@ const Audiocall = () => {
   };
 
   const closeGame = () => {
+    // TODO: rout to main menu
     console.log("Перейти в главное меню");
   }
 
