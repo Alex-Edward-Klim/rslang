@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.word-card {
+  font-family: Roboto sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: #00037e;
+  width: 100%;
+  background-color: #ececee;
+  border-radius: 33px;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  .img-sound {
+    cursor: pointer;
+    transition: 0.5s;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  .word-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 580px;
+  }
+  &__header {
+    flex-basis: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    .photo {
+      overflow: hidden;
+      border-radius: 50%;
+      width: 86px;
+      height: 86px;
+    }
+  }
+  &__description {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    .eng-example {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .img-sounds {
+      cursor: pointer;
+      transition: 0.5s;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+  .word-settings {
+    min-width: 210px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    align-items: center;
+    &__main {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    &__place {
+      font-family: Roboto, sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 20px;
+      color: #ffffff;
+      padding: 8px 12px;
+      background-color: #00037e;
+      border-radius: 55px;
+    }
+  }
+}
+
+@media (max-width: 760px) {
+  .word-card {
+    font-size: 20px;
+    flex-direction: column;
+    .word-info {
+      max-width: none;
+    }
+    .word-settings__main {
+      flex-direction: row;
+    }
+    &__description {
+      font-size: 16px;
+    }
+    .word-settings__place {
+      font-size: 18px;
+      font-weight: normal;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .word-card {
+    font-size: 16px;
+    flex-direction: column;
+    .word-info {
+      max-width: none;
+    }
+    .word-settings__main {
+      flex-direction: row;
+    }
+    &__description {
+      font-size: 14px;
+    }
+    .word-settings__place {
+      font-size: 14px;
+    }
+  }
+}
