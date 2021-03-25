@@ -11,8 +11,8 @@ import axios from "axios";
 
 const Audiocall = () => {
   //TODO: get URL from props
-  const apiUrl = "https://react-learnwords-example.herokuapp.com";
-  const wordListUrl = "https://react-learnwords-example.herokuapp.com/words";
+  const apiUrl = "https://rslang-server-2021.herokuapp.com";
+  const wordListUrl = `${apiUrl}/words`;
 
   const [wordList, setWordList] = useState();
   const [currentRound, setCurrentRound] = useState(0);
