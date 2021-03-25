@@ -1,0 +1,51 @@
+.textbook-flag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  font-size: 32px;
+
+  &__area {
+    width: 0;
+    height: 0;
+    border-width: 60px 25px 20px;
+    border-style: solid;
+    transition: 0.5s;
+    &:hover {
+      cursor: pointer;
+      border-width: 80px 25px 20px;
+    }
+  }
+  &__area.current {
+    border-width: 80px 25px 20px;
+  }
+  
+  &__number {
+    padding: 3px;
+    position: absolute;
+    top: 8px;
+    pointer-events: none;
+  }
+}
+
+.color-0 {
+  border-color: #FE6E6E #FE6E6E transparent;
+}
+.color-1 {
+  border-color: #74E38C #74E38C transparent;
+}
+.color-2 {
+  border-color:rgba(255, 245, 0, 0.63) rgba(255, 245, 0, 0.63) transparent;
+}
+.color-3 {
+  border-color: #7D6FB5 #7D6FB5 transparent;
+}
+.color-4 {
+  border-color: #FFA959 #FFA959 transparent;
+}
+.color-5 {
+  border-color: #81B3FF #81B3FF transparent;
+}
+
+
