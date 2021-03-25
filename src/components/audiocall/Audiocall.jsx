@@ -105,12 +105,10 @@ const Audiocall = () => {
   };
 
   const checkWord = (e) => {
-    // TODO: добавить проверку слов с нажатий клавиш клаиваиутры
-
     const rigthAnswerID = rigthAnswer.id;
 
     if (e.currentTarget.id === rigthAnswerID) {
-      console.log("ВЕРНО");
+      // console.log("ВЕРНО");
 
       // TODO: post request to server +1 rigth answer
     } else if (e.currentTarget.innerHTML === "Не знаю") {
@@ -119,7 +117,7 @@ const Audiocall = () => {
       // TODO: post request to server +1 wrong answer
     } else {
 
-      console.log(" НЕ ВЕРНО");
+      // console.log(" НЕ ВЕРНО");
 
       const wrongAnswerImg = e.currentTarget.children[1];
       const numberOfWord = e.currentTarget.children[2];
@@ -143,13 +141,61 @@ const Audiocall = () => {
     rigthAnswerNode.children[0].classList.remove("audiocall__option-list__item__off");
     rigthAnswerNode.children[2].classList.add("audiocall__option-list__item__off");
 
+    const rigthAnswerImgUrl = `${apiUrl}/${rigthAnswer.image}`;
+
+    setRigthAnswerImgSrc(rigthAnswerImgUrl)
+
+    setIsWordChecked(true);
+    document.addEventListener('keydown', nextWordWithKeyboard);
+  };
+
+  const checkWordWithKeyboard = (e) => {
+    if (!rigthAnswer) {
+      return
+    } else if (!((e.key) < 6) || ((e.key) === "0")) {
+      return
+    }
+    const rigthAnswerID = rigthAnswer.id;
+    const currentOptionList = optionListRef.current.childNodes;
+    const selectedOption = currentOptionList[e.key - 1];
+    let rigthAnswerOption;
+
+    for (let i = 0; i < currentOptionList.length; i++) {
+      if (currentOptionList[i].id === rigthAnswerID) {
+        rigthAnswerOption = currentOptionList[i];
+      }
+    }
+    if (rigthAnswerOption === undefined) {
+      return
+    }
+
+    if (selectedOption == rigthAnswerOption) {
+      // console.log("ВЕРНО");
+      // TODO: post request to server +1 rigth answer
+    } else {
+      // TODO: post request to server +1 wrong answer
+      // console.log("не ВЕРНО");
+
+      const wrongAnswerImg = selectedOption.children[1];
+      const numberOfWord = selectedOption.children[2];
+
+      wrongAnswerImg.classList.remove("audiocall__option-list__item__off");
+      numberOfWord.classList.add("audiocall__option-list__item__off");
+    }
+
+    rigthAnswerOption.children[0].classList.remove("audiocall__option-list__item__off");
+    rigthAnswerOption.children[2].classList.add("audiocall__option-list__item__off");
 
     const rigthAnswerImgUrl = `${apiUrl}/${rigthAnswer.image}`;
 
     setRigthAnswerImgSrc(rigthAnswerImgUrl)
 
     setIsWordChecked(true);
-  };
+
+    document.removeEventListener('keydown', checkWordWithKeyboard);
+
+    document.addEventListener('keydown', nextWordWithKeyboard);
+  }
 
   const nextWord = () => {
     const currentOptionList = optionListRef.current.childNodes;
@@ -171,7 +217,13 @@ const Audiocall = () => {
     }, 300);
 
     setCurrentRound(currentRound + 1);
-    console.log(currentRound)
+    document.removeEventListener('keydown', nextWordWithKeyboard);
+  }
+
+  const nextWordWithKeyboard = (e) => {
+    if (e.key === "Enter") {
+      nextWord();
+    }
   }
 
   useEffect(() => {
@@ -198,6 +250,10 @@ const Audiocall = () => {
       }
     }
   }, [wordList]);
+
+  useEffect(() => {
+    document.addEventListener('keydown', checkWordWithKeyboard);
+  }, [rigthAnswer])
 
   if (!wordList || wordList.length === 0) return <p>Загрузка...</p>;
 
@@ -243,7 +299,6 @@ const Audiocall = () => {
       Далее
     </p>
   );
-
 
   return (
     <>
