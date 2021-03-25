@@ -3,8 +3,9 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Login from "../login/Login";
 import Signup from "../signup/Signup";
 import ElTextBook from "../elTextBook/ElTextBook";
-import GameMemory from "../GameMemory/example"
+
 import MainPage from "../mainPage/MainPage";
+import GameMemory from "../GameMemory/GameMemory";
 
 const Container = () => {
   return (
