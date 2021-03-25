@@ -147,6 +147,7 @@ const Audiocall = () => {
 
     setIsWordChecked(true);
     document.addEventListener('keydown', nextWordWithKeyboard);
+    document.removeEventListener('keydown', checkWordWithKeyboard);
   };
 
   const checkWordWithKeyboard = (e) => {
