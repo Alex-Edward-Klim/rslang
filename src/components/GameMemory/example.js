@@ -31,14 +31,15 @@ const GameMemory =  () => {
     const handler = event => {
         const word = data[Number(event.target.dataset.item_index)];
 
-        // const newDifficulty = "game";
+        const newDifficulty = "game";
         // const newDifficulty = "compound_word";
         // const newDifficulty = "deleted_word";
-        const newDifficulty = "reconstitute";
+        // const newDifficulty = "reconstitute";
         
         handlerWords(userId, token, word, newDifficulty);
     }
 
+    console.log(data);
 
     return (
         <ul>
