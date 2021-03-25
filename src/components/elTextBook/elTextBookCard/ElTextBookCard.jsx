@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./ElTextBookCard.scss";
-import soundImg from "../../img/sound.png";
+import soundImg from "../../../img/sound.png";
 
 function ElTextBookCard({
   word,

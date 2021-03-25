@@ -37,11 +37,15 @@
     justify-content: space-around;
     align-items: center;
     width: 100%;
+    flex-wrap: wrap;
     .photo {
       overflow: hidden;
       border-radius: 50%;
       width: 86px;
       height: 86px;
+    }
+    &.header-element {
+      margin-left: 6px;
     }
   }
   &__description {
@@ -100,6 +104,7 @@
     }
     &__description {
       font-size: 16px;
+      padding-left: 20px;
     }
     .word-settings__place {
       font-size: 18px;
