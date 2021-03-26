@@ -6,6 +6,7 @@ import ElTextBook from "../elTextBook/ElTextBook";
 
 import MainPage from "../mainPage/MainPage";
 import GameMemory from "../GameMemory/GameMemory";
+import Audiocall from "../audiocall/Audiocall";
 
 const Container = () => {
   return (
@@ -17,6 +18,7 @@ const Container = () => {
           <Route path="/signup" exact render={() => <Signup />} />
           <Route path="/elTextBook" render={() => <ElTextBook />} />
           <Route path="/gamememory" exact render={() => <GameMemory />} />
+          <Route path="/audiocall" exact render={() => <Audiocall />} />
           <Route path="*" render={() => <Redirect to="/" />} />
         </Switch>
       </BrowserRouter>
