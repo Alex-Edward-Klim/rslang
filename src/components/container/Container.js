@@ -7,15 +7,14 @@ import MainPage from "../mainPage/MainPage";
 import GameMemory from "../GameMemory/GameMemory";
 import Example from "../GameMemory/example";
 import Audiocall from "../audiocall/Audiocall";
-import Footer from "../footer/Footer";
 
 const Container = () => {
   return (
     <>
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact render={() => <Footer />} />
-          <Route path="/login" exact render={() => <Footer />} />
+          <Route path="/" exact render={() => <MainPage />} />
+          <Route path="/login" exact render={() => <Login />} />
           <Route path="/signup" exact render={() => <Signup />} />
           <Route path="/elTextBook" render={() => <ElTextBook />} />
           <Route path="/gamememory" exact render={() => <GameMemory />} />
