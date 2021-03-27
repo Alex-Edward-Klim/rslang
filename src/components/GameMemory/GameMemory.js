@@ -51,7 +51,12 @@ const GameMemory = () => {
         };
     }
 
-    return loading ? <CardList data={dataGame}/> : <p>Loading...</p>;
+    return (
+        <>
+            <p>раздел: {group}, страница {page}</p>
+            { loading ? <CardList data={dataGame}/> : <p>Loading...</p> }
+        </>
+    )
 };
 
 export default GameMemory;
