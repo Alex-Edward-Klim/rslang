@@ -83,3 +83,60 @@ header{
 .headerUserPhoto{
     padding-right: 10px;
 }
+@media (max-width: 1182px) {
+    .headerContainer{
+        display: flex;
+        justify-content: space-around;
+        padding-top: 20px;
+        padding-left: 10px;
+    }
+    .headerTitle{
+        font-weight: medium;
+        font-size: 23px;
+        line-height: 35px;
+    }
+    .signIn{
+        font-weight: medium;
+        font-size: 23px;
+    }
+    .signInImg{
+        padding-left: 8px;
+        width: 18px;
+    }
+    .headeUserGuest{
+        font-size: 20px;
+        padding-right: 10px;
+    }
+    .headerUserPhoto{
+        padding-right: 10px;
+    }
+}
+@media (max-width: 720px) {
+    .headerContainer{
+        display: flex;
+        padding-top: 20px;
+        padding-left: 50px;
+    }
+    .headerTitle{
+        font-weight: medium;
+        font-size: 20px;
+        line-height: 35px;
+    }
+    .signIn{
+        font-weight: medium;
+        font-size: 20px;
+    }
+    .signInImg{
+        padding-left: 8px;
+        width: 18px;
+    }
+    .headeUserGuest{
+        font-size: 18px;
+        padding-right: 8px;
+    }
+    .headerUserPhoto{
+        padding-right: 8px;
+    }
+}
+
+
