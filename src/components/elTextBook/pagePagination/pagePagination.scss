@@ -10,10 +10,15 @@
     border-radius: 50%;
     border: none;
     background-color: #74E38C;
+    &.disable {
+      background-color: #888;
+    }
   }
   .left, .right {
     padding: 14px 14px 10px 14px;
     outline: 0;
+  }
+  .left:not(.disable), .right:not(.disable) {
     cursor: pointer;
     img {
       transition: .8s;

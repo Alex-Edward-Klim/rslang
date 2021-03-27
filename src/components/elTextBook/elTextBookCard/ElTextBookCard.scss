@@ -88,6 +88,13 @@
       padding: 8px 12px;
       background-color: #00037e;
       border-radius: 55px;
+      cursor: pointer;
+      outline: none;
+      transition: .8s;
+      &:hover {
+        color: #74e38c;
+        box-shadow: black 0 0 10px;
+      }
     }
   }
 }

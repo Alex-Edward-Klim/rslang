@@ -19,10 +19,23 @@ function ElTextBook() {
   const [wordsList, setWordList] = useState(null);
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  const getUnregWords = (group, page, callBackFunction) => {
     axios(`https://rslang-server-2021.herokuapp.com/words`, {
       params: { group, page },
-    }).then((response) => setWordList(response.data));
+    }).then((response) => callBackFunction(response.data)).catch(err => console.log(err));
+  }
+  const getRegWords = (group, page, callBackFunction) => {
+    axios(`https://rslang-server-2021.herokuapp.com/users/${userId}/aggregatedWords`, {
+      params: { group, page, wordsPerPage: 20 },
+    }).then((response) => callBackFunction(response.data)).catch(err => console.log(err));
+  }
+
+  useEffect(() => {
+    // axios(`https://rslang-server-2021.herokuapp.com/words`, {
+    //   params: { group, page },
+    // }).then((response) => setWordList(response.data));
+    getUnregWords(group, page, setWordList)
+
   }, [group, page]);
 
   const handleFlagClick = (n) => {
@@ -32,13 +45,13 @@ function ElTextBook() {
     <GroupFlags
       number={el}
       current={group}
-      key={el + Date.now()}
+      key={el + Date.now()*10}
       handleFlagClick={handleFlagClick}
     />
   ));
 
   const games = gameList.map((el, i) => (
-    <GameCard name={el.name} path={el.route} key={Date.now() + i} />
+    <GameCard name={el.name} path={el.route} key={Date.now()*10 + i} />
   ));
 
   let wordCards;
