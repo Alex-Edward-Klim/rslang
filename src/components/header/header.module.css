@@ -1,0 +1,85 @@
+body{
+    margin: 0 auto;
+}
+header{
+    height: 87px;
+    background-color: #F8FBFE;
+    font-family: Roboto;
+    font-style: normal;
+    color: #000D83;
+}
+.headerContainer{
+    max-width: 1457px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.headerTitle{
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 35px;
+}
+.list{
+    list-style-type: none;
+    width: 800px;
+}
+.list li{
+    margin: 2.3%;
+    font-size: 20px;
+    line-height: 23px;
+    display: inline-block;
+    color: #000D83;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+}
+.list li::after,
+.signIn:after {
+    display: block;
+    content: "";
+    background-color: #000D83;
+    height: 3px;
+    width: 0%;
+    left: 50%;
+    border-radius: 150px;
+    position: absolute;
+    -webkit-transition: width .3s ease-in-out;
+    -moz--transition: width .3s ease-in-out;
+    transition: width .3s ease-in-out;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.list li:hover:after,
+.list li:focus:after,
+.signIn:hover:after,
+.signIn:focus:after {
+    width: 100%;
+}
+.signIn{
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 35px;
+    display: inline-block;
+    color: #000D83;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+}
+.signInImg{
+    padding-left: 10px;
+    width: 20px;
+}
+.headerUser{
+    display: flex;
+    align-items: center;
+}
+.headeUserGuest{
+    font-size: 22px;
+    font-weight: 600;
+    color: #000D83;
+    padding-right: 10px;
+}
+.headerUserPhoto{
+    padding-right: 10px;
+}
