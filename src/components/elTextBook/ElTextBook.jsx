@@ -7,35 +7,39 @@ import {
 import axios from "axios";
 import ElTextBookCard from "./elTextBookCard/ElTextBookCard";
 import GroupFlags from "./groupFlags/GroupFlags";
+import GameCard from "./gameCard/GameCard";
+import PagePagination from "./pagePagination/PagePagination";
 import "./elTextBook.scss";
 import { setWordsGroupAndPage } from "../../redux/wordsGroupAndPage/wordsGroupAndPageActions";
+import { gameList } from "../../modules/GameList"
 
 function ElTextBook() {
   const { userId, token } = useSelector(getUserDataFromState);
-  const currentPosition = useSelector(getWordsGroupAndPageFromState);
+  const { group, page } = useSelector(getWordsGroupAndPageFromState);
   const [wordsList, setWordList] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
     axios(`https://rslang-server-2021.herokuapp.com/words`, {
-      params: currentPosition,
+      params: { group, page },
     }).then((response) => setWordList(response.data));
-  }, [currentPosition.group, currentPosition.page]);
+  }, [group, page]);
 
   const handleFlagClick = (n) => {
     dispatch(setWordsGroupAndPage({ group: n, page: 0 }));
-    console.log(currentPosition);
   };
-  console.log(currentPosition);
   const flags = Array.from({ length: 6 }, (v, k) => k).map((el) => (
     <GroupFlags
       number={el}
-      current={currentPosition.group}
+      current={group}
       key={el + Date.now()}
       handleFlagClick={handleFlagClick}
     />
   ));
 
+  const games = gameList.map((el, i) => (
+    <GameCard name={el.name} path={el.route} key={Date.now() + i} />
+  ));
 
   let wordCards;
   if (wordsList !== null) {
@@ -69,16 +73,16 @@ function ElTextBook() {
         </div>
         <div className="text-book-nav__option">
           <div className="text-book-nav__group">
-            {/*пагинация по страницам */}
+            <PagePagination />
           </div>
-          <div className="text-book-nav__game">
-            {/* 4 игры */}
-          </div>
+          <div className="text-book-nav__game">{games}</div>
         </div>
       </div>
-      <div className="word-cards">{wordCards}</div>
-      <div>
-      {/* пагинация по страницам */}
+      <div className="word-cards">
+        {wordsList === null ? <h2>Loading...</h2> : wordCards}
+      </div>
+      <div className="text-book-nav__group">
+        <PagePagination />
       </div>
     </div>
   );
