@@ -10,8 +10,8 @@ const Card = props => {
     if (correct || wrong || face) {
         return (
             <div className={cn(s.card, s.face, correct ? s.correct : null, wrong ? s.wrong : null )}>
-                <div className={s.img} style={{ backgroundImage: `url(${head}/${image})` }}/>
-                <p className={s.text}>{ word }</p>
+                { props.imgRender ? <div className={s.img} style={{ backgroundImage: `url(${head}/${image})` }} /> : null }
+                <p className={cn(s.text, props.imgRender ? null : s.textFS)} >{ word }</p>
             </div>
         )
     } else {

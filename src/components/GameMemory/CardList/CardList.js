@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { getUserDataFromState } from '../../redux/selectors';
-import handlerWords from '../../Utils/handlerWords';
+import { getUserDataFromState } from '../../../redux/selectors';
+import handlerWords from '../../../Utils/handlerWords';
 
 import s from './CardList.module.scss';
 
-import Card from './Card';
+import Card from '../Card/Card';
+import Footer from '../../footer/Footer';
 
 const CardList = props => {
     const data = props.data.concat();
@@ -65,12 +66,15 @@ const CardList = props => {
         }
     }
 
-    return (        
-        <section className={s.section}>
-            { data.map( (item, index) => <Card wordCard={item} fu={ handlerClick } key={index}/> ) }
-            { 2 * otvetCorrect + 2 * otvetWrong === data.length ? 
-                <p className={s.end}>КОНЕЦ</p> : null}
-        </section>
+    return (
+        <>
+            <section className={s.section}>
+                { data.map( (item, index) => <Card wordCard={item} imgRender={props.imgRender} fu={ handlerClick } key={index}/> ) }
+                { 2 * otvetCorrect + 2 * otvetWrong === data.length ? 
+                    <p className={s.end}>КОНЕЦ</p> : null}
+            </section>
+            <Footer />
+        </>
     )
 };
 

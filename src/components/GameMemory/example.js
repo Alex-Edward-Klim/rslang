@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
+import { useParams, Redirect } from 'react-router-dom';
 import axios from "axios";
 
 import { getUserDataFromState, getWordsGroupAndPageFromState } from "../../redux/selectors";
 import handlerWords from '../../Utils/handlerWords';
 import get20ActiveWordsGroup from '../../Utils/get20ActiveWordsGroup';
 
-const Example =  () => {
+const Example = (props) => {
+    const { id } = useParams();
     const [data, setData] = useState([]);
     const { userId, token } = useSelector(getUserDataFromState);
     const { group, page} = useSelector(getWordsGroupAndPageFromState);
@@ -58,7 +60,9 @@ const Example =  () => {
         handlerWords(userId, token, word, newDifficulty);
     }
 
+    if (!props.location.propsGame) return <Redirect to={`/gamememory/${id}`} />;
     console.log(data);
+    console.log(id," ",props.location.propsGame);
 
     return (
         <>

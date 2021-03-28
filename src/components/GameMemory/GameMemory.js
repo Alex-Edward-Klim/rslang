@@ -1,60 +1,92 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
+import { useParams, Redirect } from 'react-router-dom';
 import axios from "axios";
 
 import { getUserDataFromState, getWordsGroupAndPageFromState } from "../../redux/selectors";
+import randomWords from '../../Utils/randomWords';
+import randomСloneWidenWords from '../../Utils/randomСloneWidenWords';
+import get20ActiveWordsGroup from '../../Utils/get20ActiveWordsGroup';
 
-import CardList from './CardList';
+import CardList from './CardList/CardList';
 
-const random = (maxNum, minNum = 0) => minNum + Math.floor(Math.random() * (maxNum - minNum + 1));
-
-const GameMemory = () => {
+const GameMemory = props => {
+    const { id } = useParams();    
     const [loading , setLoading ] = useState(false);
     const [data, setData] = useState([]);
-    const { userId, token } = useSelector(getUserDataFromState);
-    const { group, page} = useSelector(getWordsGroupAndPageFromState);
-    const head = "https://rslang-server-2021.herokuapp.com";
-    const url = `${head}/users/${userId}/aggregatedWords?group=${group}&page=${page}&wordsPerPage=20`;
-    const headers = { headers: { Authorization: `Bearer ${token}` } };
+    const {userId, token} = useSelector(getUserDataFromState);
+    const {group, page} = useSelector(getWordsGroupAndPageFromState);
+    const settingsGame = props.location.propsGame;  
+    
     useEffect(() => {
-        const getData = async () => {
-            try {
-                const result = await axios.get(url , headers).then(res => res.data[0].paginatedResults);
-                setData(result);
-                setLoading(true);
-            } catch (error) {
-                console.log('useWords ERROR');
-            }
+        if (!props.location.propsGame) return <Redirect to={`/game_memory_start/${id}`} />;
+        const head = "https://rslang-server-2021.herokuapp.com";
+        const headers = { headers: { Authorization: `Bearer ${token}` } };
+        switch (id) {
+
+            case "book":
+                const filterActive = '{"$or":[{"userWord.difficulty":"studied_word"},{"userWord.difficulty":"compound_word"},{"userWord":null}]}';
+                const url = `${head}/users/${userId}/aggregatedWords?group=${group}&page=${page}&wordsPerPage=20&filter=${filterActive}`;
+                const getDataBook = async () => {
+                    try {
+                        let result = [];
+                        const res = await axios.get(url, headers).then(res => res.data[0].paginatedResults);
+                        const wordCount = settingsGame.wordCount10 ? 10 : 20;
+                        if (res.length < wordCount) {                            
+                            const wordsAll = page * 20;
+                            if (wordsAll) {
+                                const filterData = '{"$or":[{"userWord.difficulty":"studied_word"},{"userWord.difficulty":"compound_word"}]}';
+                                const urlData = `${head}/users/${userId}/aggregatedWords?group=${group}&wordsPerPage=${wordsAll}&filter=${filterData}`;
+                                const resData = await axios.get(urlData, headers).then(res => res.data[0].paginatedResults);
+                                const words = 10 - res.length;
+                                const resFilter = randomWords(resData, words);
+                                result = res.concat(resFilter);
+                            } else {
+                                result = res;
+                            };
+                        } else {
+                            result = randomWords(res, wordCount);
+                        };
+                        setData(randomСloneWidenWords(result));
+                        setLoading(true);
+                    } catch (error) {
+                        console.log('GameMemory.js -> case "book" __ ERROR');
+                    };
+                };
+                getDataBook();
+                break;
+
+            case "nav":
+                const wordCountNav = settingsGame.wordCount10 ? 10 : 20;
+                const getDataNav = async () => {
+                    try {
+                        const result = await get20ActiveWordsGroup(userId, token, group, wordCountNav);
+                        setData(randomСloneWidenWords(result));
+                        setLoading(true);
+                    } catch (error) {
+                        console.log('GameMemory.js -> case "nav" __ ERROR');
+                    };
+                };
+                getDataNav();
+                break;
+
+            case "compound":
+            break;
+
+            case "deleted":
+            break;
+
+            default:
+            break;
         };
-        getData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const dataGame = [];
-    if (loading) {
-        const dataArr = [];
-        const dataExample = data.concat(); // slice(0, 13) возможно заберу меньше слов
-        dataExample.forEach(item => {
-            if (item.userWord) {
-                if (item.userWord.difficulty === "studied_word" || item.userWord.difficulty === "compound_word") {
-                    dataArr.push({...item, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
-                    dataArr.push({...item, word: item.wordTranslate, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
-                }
-            } else {
-                dataArr.push({...item, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
-                dataArr.push({...item, word: item.wordTranslate, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
-            }
-        });
-        const dataArrCopy = dataArr.concat();
-        for (let i = 0; i < dataArrCopy.length; i++) {
-            dataGame.push({...dataArr.splice(random(dataArr.length - 1), 1)[0], index: i});
-        };
-    }
+    if (!props.location.propsGame) return <Redirect to={`/game_memory_start/${id}`} />;
 
     return (
         <>
-            <p>раздел: {group}, страница {page}</p>
-            { loading ? <CardList data={dataGame}/> : <p>Loading...</p> }
+            { loading ? <CardList data={data} imgRender={settingsGame.imgRender} /> : <p>Loading...</p> }
         </>
     )
 };
