@@ -1,9 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getUserDataFromState,
-  getWordsGroupAndPageFromState,
-} from "../../../redux/selectors";
+import { getWordsGroupAndPageFromState } from "../../../redux/selectors";
 import { setWordsGroupAndPage } from "../../../redux/wordsGroupAndPage/wordsGroupAndPageActions";
 import "./pagePagination.scss";
 import arrowL from "../../../img/arrowL.png";
@@ -13,10 +10,10 @@ function PagePagination() {
   const { group, page } = useSelector(getWordsGroupAndPageFromState);
   const dispatch = useDispatch();
 
-  let buttonLeftClass = 'page-pagination__block left';
-  if (page === 0) buttonLeftClass += " disable"
-  let buttonRightClass = 'page-pagination__block right';
-  if (page === 29) buttonRightClass += " disable"
+  let buttonLeftClass = "page-pagination__block left";
+  if (page === 0) buttonLeftClass += " disable";
+  let buttonRightClass = "page-pagination__block right";
+  if (page === 29) buttonRightClass += " disable";
 
   return (
     <div className="page-pagination">

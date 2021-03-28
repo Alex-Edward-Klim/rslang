@@ -1,34 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { getUserDataFromState } from "../../../redux/selectors";
 import "./ElTextBookCard.scss";
 import soundImg from "../../../img/sound.png";
+import handlerWords from "../../../Utils/handlerWords";
 
-function ElTextBookCard({
-  word,
-  id,
-  image,
-  audio,
-  textMeaning,
-  textMeaningTranslate,
-  textExample,
-  textExampleTranslate,
-  wordTranslate,
-  transcription,
-  audioMeaning,
-  audioExample
-}) {
-  const soundWord = new Audio("");
-  const soundMeaning = new Audio("");
-  const soundExample = new Audio("");
-  soundWord.src = `https://react-learnwords-example.herokuapp.com/${audio}`;
-  soundMeaning.src = `https://react-learnwords-example.herokuapp.com/${audioMeaning}`;
-  soundExample.src = `https://react-learnwords-example.herokuapp.com/${audioExample}`;
+function ElTextBookCard({ wordElement, correct, wrong, removeHandler }) {
+  const {
+    _id,
+    word,
+    image,
+    audio,
+    textMeaning,
+    textMeaningTranslate,
+    textExample,
+    textExampleTranslate,
+    wordTranslate,
+    transcription,
+    audioMeaning,
+    audioExample,
+  } = wordElement;
+  const { userId, token } = useSelector(getUserDataFromState);
 
-  const playSound = (el) => {
-    el.play();
+  const initIsHard = wordElement?.userWord?.difficulty === "compound_word";
+
+  const [isHard, setIsHard] = useState(initIsHard);
+
+  const playSound = (path) => {
+    const sound = new Audio("");
+    sound.src = `https://react-learnwords-example.herokuapp.com/${path}`;
+    sound.play();
+  };
+
+  const hardWordHandler = () => {
+    handlerWords(userId, token, wordElement, "compound_word");
+    setIsHard(true);
+  };
+  const delWordHandler = () => {
+    handlerWords(userId, token, wordElement, "deleted_word");
+    removeHandler(_id);
   };
 
   return (
-    <div className="word-card">
+    <div className={`word-card ${userId ? "reg" : null}`}>
       <div className="word-info">
         <div className="word-card__header">
           <div className="photo">
@@ -51,7 +65,7 @@ function ElTextBookCard({
             src={soundImg}
             width="34"
             alt=""
-            onClick={() => playSound(soundWord)}
+            onClick={() => playSound(audio)}
           />
         </div>
         <div className="word-card__description">
@@ -62,10 +76,11 @@ function ElTextBookCard({
               src={soundImg}
               height="18"
               alt=""
-              onClick={() => playSound(soundMeaning)}
+              onClick={() => playSound(audioMeaning)}
             />
           </div>
           <p dangerouslySetInnerHTML={{ __html: textMeaningTranslate }} />
+          <br />
           <div className="eng-example">
             <p dangerouslySetInnerHTML={{ __html: textExample }} />
             <img
@@ -73,19 +88,35 @@ function ElTextBookCard({
               src={soundImg}
               height="18"
               alt=""
-              onClick={() => playSound(soundExample)}
+              onClick={() => playSound(audioExample)}
             />
           </div>
           <p dangerouslySetInnerHTML={{ __html: textExampleTranslate }} />
+          <br />
+          <p>Результат изучения данного слова:</p>
+          <p>
+            Верных ответов{" "}
+            <span style={{ color: "green", fontSize: 24 }}>{correct}</span>.
+            Ошибок <span style={{ color: "red", fontSize: 24 }}>{wrong}</span>.
+          </p>
         </div>
       </div>
-      <div className="word-settings">
-        <div className="word-settings__header">Добавить в раздел:</div>
-        <div className="word-settings__main">
-          <button className="word-settings__place">Сложные слова</button>
-          <button className="word-settings__place">Удаленные слова</button>
+      {userId && (
+        <div className="word-settings">
+          <div className="word-settings__header">Добавить в раздел:</div>
+          <div className="word-settings__main">
+            <button
+              className={`word-settings__place ${isHard ? "hard" : null}`}
+              onClick={hardWordHandler}
+            >
+              {isHard ? "Сложное слово" : "Добавить в сложные"}
+            </button>
+            <button className="word-settings__place" onClick={delWordHandler}>
+              Удалить
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
