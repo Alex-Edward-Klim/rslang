@@ -17,7 +17,7 @@ const  get20ActiveWordsGroup = async (userId, token, group, volume = 20) => {
     const data = await axios.get(urlData, headers).then(res => res.data[0].paginatedResults);
     return result.concat(data);
   } else {    
-    return randomWords(result, 20);
+    return randomWords(result, volume);
   }
 };
 
