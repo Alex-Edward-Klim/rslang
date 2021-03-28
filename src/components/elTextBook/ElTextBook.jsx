@@ -102,7 +102,7 @@ function ElTextBook() {
         </div>
       </div>
       <div className="word-cards">
-        {wordsList === null ? <h2>Loading...</h2> : wordCards}
+        {wordsList === null ? <h2>Loading...</h2> : wordCards.length === 0 ? <h2>This page is empty</h2> : wordCards}
       </div>
       <div className="text-book-nav__group">
         <PagePagination />
