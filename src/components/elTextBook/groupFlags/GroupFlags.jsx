@@ -10,8 +10,8 @@ function GroupFlags({number, current, handleFlagClick}) {
   }
   return (
     <div className="textbook-flag" onClick={() => handleFlagClick(number)}>
-      <div class={classArea}></div>
-      <div class={classNumber}>{number + 1}</div>
+      <div className={classArea}></div>
+      <div className={classNumber}>{number + 1}</div>
     </div>
   )
 }

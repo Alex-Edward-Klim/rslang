@@ -14,22 +14,22 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-}
 
-h2 {
-    color: $colorText_GameStart;
-    font-weight: bold;
-    font-size: 48px;
-    line-height: 56px;
-    text-align: center;
-}
-
-p {
-    color: $colorText_GameStart;
-    font-weight: bold;
-    font-size: 21px;
-    line-height: 25px;
-    text-align: center;
+    h2 {
+        color: $colorText_GameStart;
+        font-weight: bold;
+        font-size: 48px;
+        line-height: 56px;
+        text-align: center;
+    }
+    
+    p {
+        color: $colorText_GameStart;
+        font-weight: bold;
+        font-size: 21px;
+        line-height: 25px;
+        text-align: center;
+    }
 }
 
 .control {
