@@ -10,7 +10,37 @@ import birdImg from "../../images/sprint/bird.png";
 import leftArrow from "../../images/sprint/leftArrow.png";
 import rigthArrow from "../../images/sprint/rigthArrow.png";
 
+import { useState } from "react";
+import SprintTimer from "./SprintTimer";
+
 const Sprint = () => {
+    // TODO: вынести в компоненты: audio,  timer, 
+    // const [isAudioOn, setIsAudioOn] = useState(false); 
+    
+    const [score, setScore] = useState(0);
+    const [pointsPerWord, setPointsPerWord] = useState(10);
+    const [isTimeUp, setIsTimeUp] = useState(false);
+    const [winStreak, setWinStreak] = useState(0);
+    const [isCorrectTranslation, setIsCorrectTranslation] = useState(null)
+
+    let birdsQuantity;
+    switch (pointsPerWord) {
+        case 10:
+            birdsQuantity = 1;
+            break;
+        case 20:
+            birdsQuantity = 2;
+            break;
+        case 40:
+            birdsQuantity = 4;
+            break;
+        case 80:
+            birdsQuantity = 4;
+            break;
+        default:
+            break;
+    }
+
   const bird = (
     <img
       src={birdImg}
@@ -18,10 +48,12 @@ const Sprint = () => {
       className="sprint__game-area__birds-wrapper__birds__item"
     />
   );
+
+
   return (
     <div className="sprint">
       <header className="sprint__header">
-        {/* timer */} 47
+        <SprintTimer setIsTimeUp={setIsTimeUp}/>
         <div className="sprint__header__btns">
           <img
             alt="sound btn"

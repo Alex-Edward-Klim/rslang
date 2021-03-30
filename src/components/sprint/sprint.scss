@@ -7,11 +7,27 @@
     text-align: center;
     height: 100vh;
     justify-content: space-between;
+    // align-items: center;
 
     &__header {
         display: flex;
         justify-content: space-between;
+        
+        &__timer {
+            font-weight: 500;
+            font-size: 40px;
+            line-height: 47px;
+            letter-spacing: 0.05em;
+
+            border: 2px solid #00037E;
+            border-radius: 50%;
+            padding: 4px;
+            width: 60px;
+            height: 60px;
+            margin-top: 6px;
+        }
         &__btns{
+            padding-top: 4px;
             &__audio {
                 padding: 7px;
                 cursor: pointer;
