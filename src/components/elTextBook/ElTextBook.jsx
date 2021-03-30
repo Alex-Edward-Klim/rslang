@@ -51,7 +51,7 @@ function ElTextBook() {
   };
 
   const removeHandler = (id) => {
-    setWordList(prev => prev.filter(word => word._id !== id))
+    setWordList((prev) => prev.filter((word) => word._id !== id));
   };
 
   const flags = Array.from({ length: 6 }, (v, k) => k).map((el) => (
@@ -69,10 +69,12 @@ function ElTextBook() {
 
   let wordCards;
   if (wordsList !== null) {
-    let words = [...wordsList]
+    let words = [...wordsList];
     if (userId) {
       // setWordList(prev => prev.filter(word => word?.userWord?.difficulty !== 'deleted_word'))
-      words = wordsList.filter(el => el?.userWord?.difficulty !== 'deleted_word')
+      words = wordsList.filter(
+        (el) => el?.userWord?.difficulty !== "deleted_word"
+      );
     }
     wordCards = words.map((el, i) => {
       return (
@@ -81,33 +83,41 @@ function ElTextBook() {
           wordElement={el}
           correct={el?.options?.correct_otvet ? el.options.correct_otvet : 0}
           wrong={el?.options?.wrong_otvet ? el.options.wrong_otvet : 0}
-          removeHandler={ removeHandler }
+          removeHandler={removeHandler}
         />
       );
     });
   }
 
   return (
-    <div className="text-book">
-      <div className="text-book-nav">
-        <div className="text-book-nav__header">
-          <h2 className="text-book-nav__title title">Электронный учебник</h2>
-          <div className="text-book-nav__flags flags">{flags}</div>
-        </div>
-        <div className="text-book-nav__option">
-          <div className="text-book-nav__group">
-            <PagePagination />
+    <>
+      <div className="text-book">
+        <div className="text-book-nav">
+          <div className="text-book-nav__header">
+            <h2 className="text-book-nav__title title">Электронный учебник</h2>
+            <div className="text-book-nav__flags flags">{flags}</div>
           </div>
-          <div className="text-book-nav__game">{games}</div>
+          <div className="text-book-nav__option">
+            <div className="text-book-nav__group">
+              <PagePagination />
+            </div>
+            <div className="text-book-nav__game">{games}</div>
+          </div>
+        </div>
+        <div className="word-cards">
+          {wordsList === null ? (
+            <h2>Loading...</h2>
+          ) : wordCards.length === 0 ? (
+            <h2>This page is empty</h2>
+          ) : (
+            wordCards
+          )}
+        </div>
+        <div className="text-book-nav__group">
+          <PagePagination />
         </div>
       </div>
-      <div className="word-cards">
-        {wordsList === null ? <h2>Loading...</h2> : wordCards.length === 0 ? <h2>This page is empty</h2> : wordCards}
-      </div>
-      <div className="text-book-nav__group">
-        <PagePagination />
-      </div>
-    </div>
+    </>
   );
 }
 

@@ -52,7 +52,7 @@ const GameMemoryStart = () => {
                     {/* добавить линк для других мест запуска */}
                 </div>
             </section>
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 
