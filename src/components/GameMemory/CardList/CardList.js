@@ -73,7 +73,7 @@ const CardList = props => {
                 { 2 * otvetCorrect + 2 * otvetWrong === data.length ? 
                     <p className={s.end}>КОНЕЦ</p> : null}
             </section>
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 };

@@ -16,6 +16,10 @@
   &.reg {
     justify-content: space-between;
   }
+  &.hard {
+    // border: #FE6E6E 3px solid;
+    box-shadow: #FE6E6E 0 0 10px;
+  }
   .img-sound {
     cursor: pointer;
     transition: 0.5s;
@@ -55,6 +59,7 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
+    width: 100%;
     .eng-example {
       display: flex;
       gap: 12px;
