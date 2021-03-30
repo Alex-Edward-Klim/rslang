@@ -80,10 +80,10 @@ function Header() {
     return (
         <header>
             <div className={styles.headerContainer}>
-                {width < 1182 ? burgerMenuImg : false}
+                {width < 1197 ? burgerMenuImg : false}
                 <span className={styles.headerTitle}>RS Lang</span>
                 {isBurgerMenuShow && burgerMenu}
-                {width >= 1182 ? menuMain : false}
+                {width >= 1197 ? menuMain : false}
                 <LoginStatus />
             </div>
         </header>

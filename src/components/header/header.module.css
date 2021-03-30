@@ -13,6 +13,7 @@ header{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    padding-top: 10px;
 }
 .headerTitle{
     font-weight: bold;
@@ -21,7 +22,7 @@ header{
 }
 .list{
     list-style-type: none;
-    width: 800px;
+    width: 850px;
 }
 .listItem{
     margin: 2.3%;
@@ -110,7 +111,7 @@ header{
 }
 .signInImg{
     padding-left: 10px;
-    width: 20px;
+    width: 30px;
 }
 .headerUser{
     display: flex;
@@ -125,7 +126,7 @@ header{
 .headerUserPhoto{
     padding-right: 10px;
 }
-@media (max-width: 1182px) {
+@media (max-width: 1197px) {
     .headerContainer{
         display: flex;
         justify-content: space-around;
@@ -143,7 +144,7 @@ header{
     }
     .signInImg{
         padding-left: 8px;
-        width: 18px;
+        width: 25px;
     }
     .headeUserGuest{
         font-size: 20px;
@@ -170,7 +171,7 @@ header{
     }
     .signInImg{
         padding-left: 8px;
-        width: 18px;
+        width: 20px;
     }
     .headeUserGuest{
         font-size: 18px;
@@ -193,6 +194,7 @@ header{
 .menuItem{
     display: flex;
     margin-top: 10%;
+    padding-left: 15%;
     color: #ECECEE;
     text-decoration: none;
     font-family: Roboto;
@@ -204,7 +206,7 @@ header{
 .menuItemGame{
     display: flex;
     margin-top: 10%;
-    margin-left: -20%;
+    margin-left: 25%;
     color: #ECECEE;
     text-decoration: none;
     font-family: Roboto;
