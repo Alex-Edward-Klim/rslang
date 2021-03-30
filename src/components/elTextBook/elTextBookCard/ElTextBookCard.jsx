@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { getUserDataFromState } from "../../../redux/selectors";
+import { getSettingsFromState } from "../../../redux/selectors";
 import "./ElTextBookCard.scss";
 import soundImg from "../../../img/sound.png";
 import handlerWords from "../../../Utils/handlerWords";
@@ -20,7 +21,9 @@ function ElTextBookCard({ wordElement, correct, wrong, removeHandler }) {
     audioMeaning,
     audioExample,
   } = wordElement;
+
   const { userId, token } = useSelector(getUserDataFromState);
+  const { translate, changeWordStatus } = useSelector(getSettingsFromState);
 
   const initIsHard = wordElement?.userWord?.difficulty === "compound_word";
 
@@ -42,7 +45,11 @@ function ElTextBookCard({ wordElement, correct, wrong, removeHandler }) {
   };
 
   return (
-    <div className={`word-card ${userId ? "reg" : null}`}>
+    <div
+      className={`word-card ${userId && changeWordStatus ? "reg" : null} ${
+        isHard ? "hard" : null
+      }`}
+    >
       <div className="word-info">
         <div className="word-card__header">
           <div className="photo">
@@ -57,9 +64,11 @@ function ElTextBookCard({ wordElement, correct, wrong, removeHandler }) {
           <span className="word-card__header header-element">
             {transcription}
           </span>
-          <span className="word-card__header header-element">
-            {wordTranslate}
-          </span>
+          {translate && (
+            <span className="word-card__header header-element">
+              {wordTranslate}
+            </span>
+          )}
           <img
             className="word-card__header header-element img-sound"
             src={soundImg}
@@ -79,7 +88,9 @@ function ElTextBookCard({ wordElement, correct, wrong, removeHandler }) {
               onClick={() => playSound(audioMeaning)}
             />
           </div>
-          <p dangerouslySetInnerHTML={{ __html: textMeaningTranslate }} />
+          {translate && (
+            <p dangerouslySetInnerHTML={{ __html: textMeaningTranslate }} />
+          )}
           <br />
           <div className="eng-example">
             <p dangerouslySetInnerHTML={{ __html: textExample }} />
@@ -91,7 +102,9 @@ function ElTextBookCard({ wordElement, correct, wrong, removeHandler }) {
               onClick={() => playSound(audioExample)}
             />
           </div>
-          <p dangerouslySetInnerHTML={{ __html: textExampleTranslate }} />
+          {translate && (
+            <p dangerouslySetInnerHTML={{ __html: textExampleTranslate }} />
+          )}
           <br />
           <p>Результат изучения данного слова:</p>
           <p>
@@ -101,7 +114,7 @@ function ElTextBookCard({ wordElement, correct, wrong, removeHandler }) {
           </p>
         </div>
       </div>
-      {userId && (
+      {userId && changeWordStatus && (
         <div className="word-settings">
           <div className="word-settings__header">Добавить в раздел:</div>
           <div className="word-settings__main">

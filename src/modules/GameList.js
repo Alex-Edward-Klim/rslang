@@ -9,7 +9,7 @@ export const gameList = [
   },
   {
     name: "Memory game",
-    route: "/gamememory",
+    route: "/game_memory_start/book",
   },
   {
     name: "Sprint",

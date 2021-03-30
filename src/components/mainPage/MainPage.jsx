@@ -11,6 +11,16 @@ function MainPage() {
           <h2 className="">Электронный учебник</h2>
         </div>
       </NavLink>
+      <NavLink to={`/vocabulary`} >
+        <div className="" >
+          <h2 className="">Словарь</h2>
+        </div>
+      </NavLink>
+      <NavLink to={`/settings`} >
+        <div className="" >
+          <h2 className="">Настройки</h2>
+        </div>
+      </NavLink>
     </div>
   )
 }
