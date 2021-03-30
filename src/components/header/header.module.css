@@ -23,7 +23,7 @@ header{
     list-style-type: none;
     width: 800px;
 }
-.list li{
+.listItem{
     margin: 2.3%;
     font-size: 20px;
     line-height: 23px;
@@ -33,7 +33,8 @@ header{
     cursor: pointer;
     position: relative;
 }
-.list li::after,
+.listItem::after,
+.dropdownItem::after,
 .signIn:after {
     display: block;
     content: "";
@@ -50,11 +51,52 @@ header{
     -moz-transform: translateX(-50%);
     transform: translateX(-50%);
 }
-.list li:hover:after,
-.list li:focus:after,
+.listItem:hover:after,
+.listItem:focus:after,
+.dropdownItem:hover:after,
+.dropdownItem:focus:after,
 .signIn:hover:after,
 .signIn:focus:after {
     width: 100%;
+}
+.dropdownItem:hover:after,
+.dropdownItem:focus:after{
+    width: 60%;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 1.5% ;
+    margin-left: 1.5%;
+}   
+.dropdownContent {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background-color: #ECECEE;
+    width: 180px;
+    height: 146px;
+    margin: 3px 0px 0px -65px;
+    padding-left: 10%;
+    border-radius: 30px;
+    border: solid 2px #00037E;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdownItem{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    text-decoration: none;
+    padding: 2%;
+    color: #00037E;
+    cursor: pointer;
+}
+.dropdown:hover .dropdownContent {
+    display: flex;
 }
 .signIn{
     font-weight: bold;
@@ -138,5 +180,49 @@ header{
         padding-right: 8px;
     }
 }
-
-
+.burgerMenuWrapper{
+    position: fixed;
+    display: flex;
+    max-width: 200px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #000d83;
+    border-radius: 0px 30px 30px 0px;
+}
+.menuItem{
+    display: flex;
+    margin-top: 10%;
+    color: #ECECEE;
+    text-decoration: none;
+    font-family: Roboto;
+    font-size: 19px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color .25s ease-in-out;
+}
+.menuItemGame{
+    display: flex;
+    margin-top: 10%;
+    margin-left: -20%;
+    color: #ECECEE;
+    text-decoration: none;
+    font-family: Roboto;
+    font-size: 19px;
+    cursor: pointer;
+    transition: color .25s ease-in-out;
+}
+.menuItemGame:hover,
+.menuItem:hover{
+    color: #acacac;
+}
+.burgerClose{
+    margin-top: 14%;
+    margin-right: 10%;
+    height: 17px;
+    cursor: pointer;
+}
+.burgerImg{
+    height: 32px;
+    cursor: pointer;
+}
