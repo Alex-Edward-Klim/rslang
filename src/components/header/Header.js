@@ -44,7 +44,7 @@ function Header() {
                     <ul className={styles.dropdownContent}>
                         <NavLink className={styles.dropdownItem} to="/">Саванна</NavLink>
                         <NavLink className={styles.dropdownItem} to="/">Аудиовызов</NavLink>
-                        <NavLink className={styles.dropdownItem} to="/">Своя игра</NavLink>
+                        <NavLink className={styles.dropdownItem} to="/">Карточки</NavLink>
                         <NavLink className={styles.dropdownItem} to="/">Спринт</NavLink>
                     </ul>
                 </div>
@@ -63,7 +63,7 @@ function Header() {
                     <ul>
                         <NavLink className={styles.menuItemGame} to="/">Саванна</NavLink>
                         <NavLink className={styles.menuItemGame} to="/">Аудиовызов</NavLink>
-                        <NavLink className={styles.menuItemGame} to="/">Своя игра</NavLink>
+                        <NavLink className={styles.menuItemGame} to="/">Карточки</NavLink>
                         <NavLink className={styles.menuItemGame} to="/">Спринт</NavLink>
                     </ul>
                 <NavLink className={styles.menuItem} to="/">Словарь</NavLink>
