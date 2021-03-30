@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../../redux/user/userActions";
+import styles from "../login/login.module.scss";
+import signInImg from "../../images/icons/sign-in.png";
 // import { getUserDataFromState } from "../../redux/selectors";
 import axios from "axios";
 
@@ -42,59 +44,67 @@ const Login = () => {
   };
 
   return (
-    <>
-      <h1>Вход</h1>
-
+    <div className={styles.wrapper}>
       {/* <button onClick={() => console.log(userData)}>Log User Data</button> */}
 
       <form onSubmit={handleSubmit}>
-        <div>
-          <button type="button" onClick={() => history.push("/signup")}>
+        <div className={styles.signInUp}>
+          <h1 className={styles.signInBtn}>Вход</h1>
+          <button className={styles.signUpBtn} type="button" onClick={() => history.push("/signup")}>
             Регистрация
           </button>
         </div>
+        
+        <div className={styles.infoAndImg}>
+          <div className={styles.backMain}>
+            <img className={styles.signInImg} src={signInImg} alt='sign_in' />
+            <div>
+              <button type="button" onClick={() => history.push("/")}>
+                На главную страницу
+              </button>
+            </div>
+          </div>
+          <div className={styles.sidebar}>
+              <div>
+                <label htmlFor="userEmail">Электронная Почта:</label>
+                <input
+                  type="email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{1,}$"
+                  id="userEmail"
+                  required
+                  value={userEmail}
+                  onChange={(e) => setUserEmail(e.target.value)}
+                />
+              </div>
 
-        <div>
-          <label htmlFor="userEmail">Электронная Почта:</label>
-          <input
-            type="email"
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{1,}$"
-            id="userEmail"
-            required
-            value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
-          />
-        </div>
+              <div>
+                <label htmlFor="userPassword">Пароль:</label>
+                <input
+                  type="password"
+                  id="userPassword"
+                  required
+                  value={userPassword}
+                  onChange={(e) => setUserPassword(e.target.value)}
+                />
+              </div>
+            <div>
+                <div className={styles.buttons}>
+                  <button type="submit" disabled={disabled}>
+                    Войти
+                  </button>
+                  {disabled ? (
+                    <span>&nbsp;(Выполняется запрос на сервер...)</span>
+                  ) : null}
+                </div>
 
-        <div>
-          <label htmlFor="userPassword">Пароль:</label>
-          <input
-            type="password"
-            id="userPassword"
-            required
-            value={userPassword}
-            onChange={(e) => setUserPassword(e.target.value)}
-          />
-        </div>
+                <div style={{ color: "red" }}>{errMessage ? errMessage : null}</div>
 
-        <div>
-          <button type="submit" disabled={disabled}>
-            Войти
-          </button>
-          {disabled ? (
-            <span>&nbsp;(Выполняется запрос на сервер...)</span>
-          ) : null}
-        </div>
-
-        <div style={{ color: "red" }}>{errMessage ? errMessage : null}</div>
-
-        <div>
-          <button type="button" onClick={() => history.push("/")}>
-            На главную страницу
-          </button>
-        </div>
+                
+              </div>
+              </div>
+          </div>
       </form>
-    </>
+    </div>
   );
 };
 
