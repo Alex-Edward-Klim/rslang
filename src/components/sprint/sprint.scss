@@ -1,0 +1,110 @@
+.sprint {
+    max-width: 1140px;
+    margin: 0 auto;
+    color: #00037E;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 100vh;
+    justify-content: space-between;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        &__btns{
+            &__audio {
+                padding: 7px;
+                cursor: pointer;
+            }
+            &__exit {
+                margin-left: 16px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__game-area {
+        margin: 0 auto;
+        max-width: 500px;
+
+        &__wrapper {
+            background: #ECECEE;
+            border: 2px solid rgba(0, 3, 126, 0.5);
+            border-radius: 50px;
+        }
+
+        &__total-score{
+            font-weight: bold;
+            font-size: 50px;
+            line-height: 70px;
+        }
+
+        &__streak {
+            margin: 3vh;
+        }
+
+        &__birds-wrapper {
+            text-align: left;
+            margin: 5vh;
+            &__birds__item +  &__birds__item {
+                padding-left: 20px;
+            }
+            &__branch {
+                position: relative;
+                bottom: 19px;
+            }
+        }
+        &__main-word {
+            font-weight: bold;
+            font-size: 35px;
+            line-height: 41px;
+        }
+        &__second-word {
+            font-weight: normal;
+            font-size: 35px;
+            line-height: 41px;
+            margin: 2vh 0px;
+        }
+        &__indicator {
+            height: 44px;
+            display: flex;
+            justify-content: center;
+        }
+        &__answer-btn {
+            display: flex;
+            justify-content: space-evenly;
+            &__btn {
+                margin: 0 auto 16px;
+                border-radius: 15px;
+                text-align: center;
+                cursor: pointer;
+                padding: 16px 46px;
+                color: #F8FBFE;
+            }
+
+            &__wrong {
+                background: #B02424;
+            }
+            &__right {
+                background: #3BC140;
+            }
+
+            &__btn:hover {
+                box-shadow: 1px 3px 5px 1px rgba(0,0,0,0.45);
+                -webkit-box-shadow: 1px 3px 5px 1px rgba(0,0,0,0.45);
+                -moz-box-shadow: 1px 3px 5px 1px rgba(0,0,0,0.45);
+            }
+        }
+    }
+    &__keyboard-btns {
+        margin: 1vh 0 4vh;
+        display: flex;
+        justify-content: center;
+        & img {
+            cursor: pointer;
+        }
+        & img + img {
+            margin-left: 16px;
+        }
+    }
+}

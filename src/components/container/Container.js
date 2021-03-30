@@ -12,6 +12,7 @@ import Vocabulary from "../vocabulary/Vocabulary";
 import Footer from "../footer/Footer";
 import Settings from "../settings/Settings";
 import Header from "../header/Header";
+import Sprint from "../sprint/Sprint";
 
 const Container = () => {
   return (
