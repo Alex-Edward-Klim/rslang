@@ -32,7 +32,7 @@ const Sprint = () => {
   const [round, setRound] = useState(1);
 
   //
-  const [rightAnswerList, setRigthAnswerList] = useState([]);
+  const [rightAnswerList, setRightAnswerList] = useState([]);
   const [wrongAnswerList, setWrongAnswerList] = useState([]);
   //
 
@@ -80,7 +80,7 @@ const Sprint = () => {
     getSecondWord(mainWord);
   };
 
-  const setRigthAnswer = () => {
+  const setRightAnswer = () => {
     let currentWinStreak = winStreak;
     if (winStreak < 3) {
       currentWinStreak += 1;
@@ -93,16 +93,38 @@ const Sprint = () => {
       }
     }
 
-    const currentRigthAnswerList = rightAnswerList;
-    currentRigthAnswerList.push(mainWord);
-    setRigthAnswerList(currentRigthAnswerList);
+    const currentRightAnswerList = rightAnswerList;
+    currentRightAnswerList.push(mainWord);
+    setRightAnswerList(currentRightAnswerList);
 
     setScore(score + pointsPerWord);
   };
+  // 
+  const setWrongAnswer = () => {
+    let currentWinStreak = winStreak;
+    if (winStreak < 3) {
+      currentWinStreak += 1;
+      setWinStreak(currentWinStreak);
+    } else if (winStreak === 3) {
+      currentWinStreak = 0;
+      setWinStreak(0);
+      if (pointsPerWord < 80) {
+        setPointsPerWord(pointsPerWord * 2);
+      }
+    }
+
+    const currentRightAnswerList = rightAnswerList;
+    currentRightAnswerList.push(mainWord);
+    setRightAnswerList(currentRightAnswerList);
+
+    setScore(score + pointsPerWord);
+  };
+  // 
+
 
   const checkAnswerTrue = () => {
     if (isCorrectTranslation) {
-      setRigthAnswer();
+      setRightAnswer();
 
       console.log("+1");
     } else {
@@ -113,7 +135,7 @@ const Sprint = () => {
 
   const checkAnswerFalse = () => {
     if (!isCorrectTranslation) {
-      setRigthAnswer();
+      setRightAnswer();
 
       console.log("+1");
     } else {
@@ -149,23 +171,23 @@ const Sprint = () => {
   );
 
   const emptyCircle = <img src={emptyCircleSrc} alt="empty circle" />;
-  const rigthAnswerCircle = (
+  const rightAnswerCircle = (
     <img
       src={circleCorrectAnswerSrc}
-      alt="rigth answer circle"
-      className="sprint__game-area__streak__rigth-answer"
+      alt="right answer circle"
+      className="sprint__game-area__streak__right-answer"
     />
   );
   
   const ShowWinStreak = () => {
     if (pointsPerWord === 80) {
-      return rigthAnswerCircle;
+      return rightAnswerCircle;
     }
     return (
       <>
-        {winStreak > 0 ? rigthAnswerCircle : emptyCircle}
-        {winStreak > 1 ? rigthAnswerCircle : emptyCircle}
-        {winStreak > 2 ? rigthAnswerCircle : emptyCircle}
+        {winStreak > 0 ? rightAnswerCircle : emptyCircle}
+        {winStreak > 1 ? rightAnswerCircle : emptyCircle}
+        {winStreak > 2 ? rightAnswerCircle : emptyCircle}
       </>
     );
   };
