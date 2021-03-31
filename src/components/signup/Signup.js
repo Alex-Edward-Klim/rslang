@@ -4,6 +4,9 @@ import { useHistory } from "react-router";
 import imageCompression from "browser-image-compression";
 import axios from "axios";
 
+import styles from "../signup/signup.module.scss";
+import signUpImg from "../../images/icons/sign-up.png";
+
 const Signup = () => {
   const history = useHistory();
 
@@ -90,9 +93,27 @@ const Signup = () => {
     </>
   ) : (
     <>
-      <h1>Создать нового пользователя:</h1>
+    <div className={styles.wrapper}>
+      {/* <h1>Создать нового пользователя:</h1> */}
+      
 
       <form onSubmit={handleSubmit}>
+
+        <div className={styles.signInUp}>
+          <button className={styles.signInBtn} type="button" onClick={() => history.push("/login")}>Вход</button>
+          <h1 className={styles.signUpBtn}>Регистрация</h1>
+        </div>
+
+        <div className={styles.infoAndImg}>
+          <div className={styles.backMain}>
+            <img className={styles.signInImg} src={signUpImg} alt='sign_in' />
+            <div>
+              <button type="button" onClick={() => history.push("/")}>
+                На главную страницу
+              </button>
+            </div>
+          </div>
+          <div className={styles.sidebar}>
         <div>
           <label htmlFor="userName">Имя:</label>
           <input
@@ -136,13 +157,13 @@ const Signup = () => {
           />
         </div>
 
-        <div>
-          <label htmlFor="userPhoto">
-            Фото:&nbsp;
-            <span style={{ backgroundColor: "rgb(118, 118, 118)" }}>
-              Выберите файл
-            </span>
-          </label>
+        <div >
+          <div>
+            <label htmlFor="userPhoto">
+              Фото:&nbsp;
+              <span className={styles.fileImg}>Выберите файл</span>
+            </label>
+          </div>
           <input
             style={{ display: "none" }}
             type="file"
@@ -151,10 +172,10 @@ const Signup = () => {
             onChange={(e) => fileSelectedHandler(e)}
           />
 
-          <img ref={imageRef} alt="" />
+          <img className={styles.photo} ref={imageRef} alt="" />
         </div>
 
-        <div>
+        <div className={styles.attention}>
           <button type="submit" disabled={disabled}>
             Создать пользователя
           </button>
@@ -166,13 +187,10 @@ const Signup = () => {
         </div>
 
         <div style={{ color: "red" }}>{errMessage ? errMessage : null}</div>
-
-        <div>
-          <button type="button" onClick={() => history.push("/")}>
-            На главную страницу
-          </button>
+        </div>
         </div>
       </form>
+      </div>
     </>
   );
 };
