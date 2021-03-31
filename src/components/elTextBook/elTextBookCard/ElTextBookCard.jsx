@@ -31,7 +31,7 @@ function ElTextBookCard({ wordElement, correct, wrong, removeHandler }) {
 
   const playSound = (path) => {
     const sound = new Audio("");
-    sound.src = `https://react-learnwords-example.herokuapp.com/${path}`;
+    sound.src = `https://rslang-server-2021.herokuapp.com/${path}`;
     sound.play();
   };
 

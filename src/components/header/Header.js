@@ -43,14 +43,14 @@ function Header() {
                 <NavLink className={styles.listItem} to="/">Игры</NavLink>
                     <ul className={styles.dropdownContent}>
                         <NavLink className={styles.dropdownItem} to="/">Саванна</NavLink>
-                        <NavLink className={styles.dropdownItem} to="/">Аудиовызов</NavLink>
-                        <NavLink className={styles.dropdownItem} to="/">Карточки</NavLink>
+                        <NavLink className={styles.dropdownItem} to="/audiocall">Аудиовызов</NavLink>
+                        <NavLink className={styles.dropdownItem} to="/game_memory_start/nav">Карточки</NavLink>
                         <NavLink className={styles.dropdownItem} to="/">Спринт</NavLink>
                     </ul>
                 </div>
-            <NavLink className={styles.listItem} to="/">Словарь</NavLink>
-            <NavLink className={styles.listItem} to="/">Электронный учебник</NavLink>
-            <NavLink className={styles.listItem} to="/">Настройки</NavLink>
+            <NavLink className={styles.listItem} to="/vocabulary">Словарь</NavLink>
+            <NavLink className={styles.listItem} to="/elTextBook">Электронный учебник</NavLink>
+            <NavLink className={styles.listItem} to="/settings">Настройки</NavLink>
             <NavLink className={styles.listItem} to="/">Статистика</NavLink>
         </ul>
     );
@@ -62,13 +62,13 @@ function Header() {
                 <NavLink className={styles.menuItem} to="/">Игры</NavLink>
                     <ul>
                         <NavLink className={styles.menuItemGame} to="/">Саванна</NavLink>
-                        <NavLink className={styles.menuItemGame} to="/">Аудиовызов</NavLink>
-                        <NavLink className={styles.menuItemGame} to="/">Карточки</NavLink>
+                        <NavLink className={styles.menuItemGame} to="/audiocall">Аудиовызов</NavLink>
+                        <NavLink className={styles.menuItemGame} to="/game_memory_start/nav">Карточки</NavLink>
                         <NavLink className={styles.menuItemGame} to="/">Спринт</NavLink>
                     </ul>
-                <NavLink className={styles.menuItem} to="/">Словарь</NavLink>
-                <NavLink className={styles.menuItem} to="/">Электронный учебник</NavLink>
-                <NavLink className={styles.menuItem} to="/">Настройки</NavLink>
+                <NavLink className={styles.menuItem} to="/vocabulary">Словарь</NavLink>
+                <NavLink className={styles.menuItem} to="/elTextBook">Электронный учебник</NavLink>
+                <NavLink className={styles.menuItem} to="/settings">Настройки</NavLink>
                 <NavLink className={styles.menuItem} to="/">Статистика</NavLink>
             </ul>
             <img className={styles.burgerClose} onClick={toggleMenu} src={burgerMenuCloseSrc} alt="close" />

@@ -11,12 +11,14 @@ import Audiocall from "../audiocall/Audiocall";
 import Vocabulary from "../vocabulary/Vocabulary";
 import Footer from "../footer/Footer";
 import Settings from "../settings/Settings";
+import Header from "../header/Header";
 
 const Container = () => {
   return (
     <>
       <BrowserRouter>
-        <div style={{ minHeight: "calc(100vh - 109px)" }}>
+        <Header />  
+        <div style={{ minHeight: "calc(100vh - 196px)", display: "flex", flexDirection: "column", alignItems:"center" }}>
           <Switch>
             <Route path="/" exact render={() => <MainPage />} />
             <Route path="/login" exact render={() => <Login />} />
@@ -39,8 +41,8 @@ const Container = () => {
             <Route path="*" render={() => <Redirect to="/" />} />
           </Switch>
         </div>
+        <Footer />
       </BrowserRouter>
-      <Footer />
     </>
   );
 };
