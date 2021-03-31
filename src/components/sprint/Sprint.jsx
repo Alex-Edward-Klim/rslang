@@ -80,8 +80,9 @@ const Sprint = () => {
     getSecondWord(mainWord);
   };
 
-  const setRightAnswer = () => {
+  const countRightAnswer = () => {
     let currentWinStreak = winStreak;
+
     if (winStreak < 3) {
       currentWinStreak += 1;
       setWinStreak(currentWinStreak);
@@ -102,29 +103,19 @@ const Sprint = () => {
   // 
   const setWrongAnswer = () => {
     let currentWinStreak = winStreak;
-    if (winStreak < 3) {
-      currentWinStreak += 1;
+
+    if (currentWinStreak > 0) {
+      currentWinStreak -= 1;
       setWinStreak(currentWinStreak);
-    } else if (winStreak === 3) {
-      currentWinStreak = 0;
-      setWinStreak(0);
-      if (pointsPerWord < 80) {
-        setPointsPerWord(pointsPerWord * 2);
-      }
     }
 
-    const currentRightAnswerList = rightAnswerList;
-    currentRightAnswerList.push(mainWord);
-    setRightAnswerList(currentRightAnswerList);
-
-    setScore(score + pointsPerWord);
   };
   // 
 
 
   const checkAnswerTrue = () => {
     if (isCorrectTranslation) {
-      setRightAnswer();
+      countRightAnswer();
 
       console.log("+1");
     } else {
@@ -135,7 +126,7 @@ const Sprint = () => {
 
   const checkAnswerFalse = () => {
     if (!isCorrectTranslation) {
-      setRightAnswer();
+      countRightAnswer();
 
       console.log("+1");
     } else {
