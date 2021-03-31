@@ -100,8 +100,8 @@ const Sprint = () => {
 
     setScore(score + pointsPerWord);
   };
-  // 
-  const setWrongAnswer = () => {
+
+  const countWrongAnswer = () => {
     let currentWinStreak = winStreak;
 
     if (currentWinStreak > 0) {
@@ -109,9 +109,10 @@ const Sprint = () => {
       setWinStreak(currentWinStreak);
     }
 
+    const currentWrondAnswerList = wrongAnswerList;
+    currentWrondAnswerList.push(mainWord);
+    setWrongAnswerList(currentWrondAnswerList);
   };
-  // 
-
 
   const checkAnswerTrue = () => {
     if (isCorrectTranslation) {
@@ -119,6 +120,8 @@ const Sprint = () => {
 
       console.log("+1");
     } else {
+      countWrongAnswer();
+
       console.log("-1");
     }
     setRound(round + 1);
@@ -130,6 +133,8 @@ const Sprint = () => {
 
       console.log("+1");
     } else {
+      countWrongAnswer();
+
       console.log("-1");
     }
     setRound(round + 1);
