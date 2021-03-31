@@ -18,7 +18,7 @@ const Sprint = () => {
   // TODO: change api url
   const apiUrl = "https://rslang-server-2021.herokuapp.com";
   const wordListUrl = `${apiUrl}/words`;
-  // TODO: вынести в компоненты: audio,  timer,
+  // TODO: вынести в компоненты: audio,
   // const [isAudioOn, setIsAudioOn] = useState(false);
 
   const [wordList, setWordList] = useState();
@@ -30,11 +30,9 @@ const Sprint = () => {
   const [mainWord, setMainWord] = useState("");
   const [secondWord, setSecondWord] = useState("");
   const [round, setRound] = useState(1);
-
-  //
   const [rightAnswerList, setRightAnswerList] = useState([]);
   const [wrongAnswerList, setWrongAnswerList] = useState([]);
-  //
+
 
   let birdsQuantity = 1;
   switch (pointsPerWord) {
@@ -70,6 +68,10 @@ const Sprint = () => {
 
     return secondWord;
   };
+
+  const closeGame = () => {
+    // TODO: link to main page
+  }
 
   const renderGame = () => {
     if (!wordList) return;
@@ -114,15 +116,16 @@ const Sprint = () => {
     setWrongAnswerList(currentWrondAnswerList);
   };
 
+  // TODO: post request after answer, and save in localStorage
   const checkAnswerTrue = () => {
     if (isCorrectTranslation) {
       countRightAnswer();
 
-      console.log("+1");
+      // TODO: save right answer
     } else {
       countWrongAnswer();
 
-      console.log("-1");
+      // TODO: save wrong answer
     }
     setRound(round + 1);
   };
@@ -131,11 +134,11 @@ const Sprint = () => {
     if (!isCorrectTranslation) {
       countRightAnswer();
 
-      console.log("+1");
+      // TODO: save right answer
     } else {
       countWrongAnswer();
 
-      console.log("-1");
+      // TODO: save wrong answer
     }
     setRound(round + 1);
   };
@@ -149,6 +152,7 @@ const Sprint = () => {
   }, []);
 
   useEffect(() => {
+    // TODO: add endGameScreen
     if (isTimeUp) {
       console.log("end game");
     }
@@ -190,11 +194,10 @@ const Sprint = () => {
 
   if (!wordList || wordList.length === 0) return <p>Загрузка...</p>;
 
-
   return (
     <div className="sprint">
       <header className="sprint__header">
-        {/* <SprintTimer setIsTimeUp={setIsTimeUp}/> */}
+        <SprintTimer setIsTimeUp={setIsTimeUp}/>
         <div className="sprint__header__btns">
           <img
             alt="sound btn"
@@ -205,6 +208,7 @@ const Sprint = () => {
             alt="close btn"
             className="sprint__header__btns__exit"
             src={closeImg}
+            onClick={closeGame}
           />
         </div>
       </header>
@@ -235,6 +239,7 @@ const Sprint = () => {
             {secondWord.wordTranslate}
           </p>
           <div className="sprint__game-area__indicator">
+            {/* TODO: indicator */}
             {/* <img src={circleCorrectAnswer} alt="правильный ответ" /> */}
           </div>
           <div className="sprint__game-area__answer-btn">
