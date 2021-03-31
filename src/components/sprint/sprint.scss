@@ -57,6 +57,9 @@
 
         &__streak {
             margin: 3vh;
+            &__rigth-answer {
+                height: 24px;
+            }
         }
 
         &__birds-wrapper {
