@@ -36,6 +36,7 @@ const Login = () => {
         );
         setDisabled(false);
         dispatch(setUserData(response.data));
+        history.push("/")
       })
       .catch((err) => {
         setErrMessage("Неправильный адрес электронной почты или пароль!");
