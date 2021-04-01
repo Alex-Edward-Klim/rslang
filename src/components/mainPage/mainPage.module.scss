@@ -1,0 +1,264 @@
+body {
+  margin: 0 auto;
+  background-color: #F8FBFE;
+}
+.mainPage {
+  margin: 5px 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  border: #00037E 2px solid;
+  border-radius: 30px;
+  color: #00037E;
+  font-family: Roboto;
+}
+.container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 2%;
+}
+.sideLeft{
+  padding: 1% 3%;
+}
+.sideLeft h3{
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 42px;
+  padding-left: 4%;
+}
+.sideLeft div{
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: 0.05em;
+  padding-top: 3%;
+}
+.mainImg{
+  width: 480px;
+  height: 313px;
+}
+.video{
+  margin: 3% 0 2% 0;
+  width: 835px;
+  height: 501px;
+  border-radius: 30px;
+}
+.titleTeam{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  max-width: 1217px;
+  min-width: 500px;
+  margin-bottom: 2%;
+}
+.titleTeam h3{
+  font-weight: bold;
+  font-size: 45px;
+  letter-spacing: 0.05em;
+  padding: 1% 0 0 2%;
+}
+.personCard{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  background: rgba(0, 3, 126, 0.14);
+  border-radius: 50px;
+  padding: 1.5%;
+  margin: 1.5% 2%;
+}
+.profilePhoto{
+  width: 246px;
+  height: 214px;
+  border-radius: 50px;
+}
+.infoPerson{
+  max-width: 800px;
+  padding: 0 1% 1% 2%;
+}
+.infoPerson h4{
+  font-size: 36px;
+  line-height: 42px;
+  letter-spacing: 0.05em;
+}
+.containerLocation{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  font-weight: 300;
+  font-style: normal;
+  font-family: cursive;
+  font-size: 13.5px;
+  line-height: 16px;
+  color: #636363;
+}
+.containerLocation img{
+  margin-top: 1%;
+  padding-left: 1%;
+}
+.containerInfo{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  font-weight: 300;
+  font-style: normal;
+  font-family: cursive;
+  font-size: 14px;
+  line-height: 16px;
+}
+.containerInfo div{
+  padding: 0 0 0 1%;
+}
+.containerInfo img{
+  padding: 0.5% 0 0 0;
+}
+.infoPerson h3{
+  font-weight: 600;
+  font-size: 21px;
+  line-height: 23px;
+  letter-spacing: 0.03em;
+  margin-top: 1%;
+}
+.aboutPerson{
+  font-size: 17px;
+  line-height: 19px;
+  padding-top: 0.8%;
+}
+@media (max-width: 1217px) {
+  .mainPage {
+    margin: 10px 50%;
+  }
+  .sideLeft h3{
+    font-size: 28px;
+    padding-left: 2%;
+  }
+  .sideLeft div{
+    font-size: 20px;
+  }
+  .mainImg{
+    margin-top: 10%;
+    width: 160px;
+    height: 123px;
+  }
+  .video{
+    width: 543px;
+    height: 326px;
+    padding: 1%;
+  }
+  .titleTeam{
+    max-width: 1217px;
+    min-width: 550px;
+    margin-bottom: 2%;
+  }
+  .titleTeam h3{
+    font-size: 35px;
+  }
+  .titleTeam img{
+    width: 55px;
+    height: 55px;
+  }
+  .profilePhoto{
+    width: 175px;
+    height: 163px;
+  }
+  .infoPerson{
+    max-width: 720px;
+    padding: 0 1% 1% 2%;
+  }
+  .infoPerson h4{
+    font-size: 26px;
+    line-height: 23px;
+  }
+  .containerLocation{
+    font-size: 10px;
+  }
+  .containerLocation img{
+    padding-top: 0.5%;
+    margin-top: 0;
+  }
+  .containerInfo{
+    font-size: 12px;
+  }
+  .containerInfo img{
+    width: 14px;
+    height: 14px;
+  }
+  .infoPerson h3{
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .aboutPerson{
+    font-size: 13px;
+    line-height: 15px;
+  }
+}
+@media (max-width: 720px) {
+  .sideLeft h3{
+    font-size: 22px;
+    padding-left: 1%;
+  }
+  .sideLeft div{
+    font-size: 16px;
+  }
+  .mainImg{
+    margin-top: 20%;
+    width: 100px;
+    height: 85px;
+  }
+  .video{
+    width: 393px;
+    height: 236px;
+    padding: 1%;
+  }
+  .titleTeam{
+    max-width: 720px;
+    min-width: 450px;
+    margin-bottom: 2%;
+  }
+  .titleTeam h3{
+    font-size: 25px;
+  }
+  .titleTeam img{
+    width: 36px;
+    height: 34px;
+  }
+  .personCard{
+    border-radius: 25px;
+    padding: 1.5%;
+    margin: 1.5% 2%;
+  }
+  .profilePhoto{
+    width: 123px;
+    height: 108px;
+    border-radius: 25px;
+  }
+  .infoPerson{
+    max-width: 500px;
+  }
+  .infoPerson h4{
+    font-size: 19px;
+    line-height: 20px;
+  }
+  .containerLocation{
+    font-size: 8px;
+    margin-top: 0.2%;
+  }
+  .containerInfo{
+    font-size: 10px;
+  }
+  .containerInfo img{
+    width: 11px;
+    height: 11px;
+  }
+  .infoPerson h3{
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .aboutPerson{
+    font-size: 10px;
+  }
+}
