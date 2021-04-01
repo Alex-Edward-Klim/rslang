@@ -1,0 +1,35 @@
+.vocabulary {
+  
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.typeWord {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 20px auto;
+  flex-wrap: wrap;
+}
+
+.typeWordEl {
+  text-align: center;
+  font-size: 22px;
+  padding: 10px 20px;
+  min-width: 120px;
+  background-color: #000D83;
+  border-radius: 15px;
+  color: white
+}
