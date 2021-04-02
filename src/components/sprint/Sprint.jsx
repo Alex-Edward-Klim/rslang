@@ -186,6 +186,24 @@ const Sprint = () => {
     renderGame();
   }, [wordList, round]);
 
+  useEffect(() => {
+    const checkAnswerWithKeyboard = ({key}) => {
+
+      if (key === "ArrowLeft") {
+        checkAnswerFalse();
+      } else if (key === "ArrowRight") {
+        checkAnswerTrue();
+      }
+    };
+    
+
+    window.addEventListener('keydown', checkAnswerWithKeyboard);
+
+    return () => {
+      window.removeEventListener('keydown', checkAnswerWithKeyboard);
+    }
+  }, [isCorrectTranslation, round])
+
   const bird = (
     <img
       src={birdImg}
