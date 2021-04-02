@@ -5,12 +5,13 @@ import audioOn from "./assets/icons/audioOn.png";
 import closeImg from "./assets/icons/closeBtn.png";
 import emptyCircleSrc from "./assets/icons/emptyCircle.png";
 import circleCorrectAnswerSrc from "./assets/icons/circleCorrectAnswer.png";
+import circleWrongAnswerSrc from "./assets/icons/circleWrongAnswer.png";
 import branchImg from "./assets/images/branch.png";
 import birdImg from "./assets/images/bird.png";
 import leftArrow from "./assets/images/leftArrow.png";
 import rightArrow from "./assets/images/rightArrow.png";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import SprintTimer from "./sprintTimer/SprintTimer";
 
@@ -30,9 +31,13 @@ const Sprint = () => {
   const [mainWord, setMainWord] = useState("");
   const [secondWord, setSecondWord] = useState("");
   const [round, setRound] = useState(1);
+
+  const indicatorTrue = useRef(null);
+  const indicatorFalse = useRef(null);
+
+  // TODO: transfer to localStorage
   const [rightAnswerList, setRightAnswerList] = useState([]);
   const [wrongAnswerList, setWrongAnswerList] = useState([]);
-
 
   let birdsQuantity = 1;
   switch (pointsPerWord) {
@@ -71,7 +76,7 @@ const Sprint = () => {
 
   const closeGame = () => {
     // TODO: link to main page
-  }
+  };
 
   const renderGame = () => {
     if (!wordList) return;
@@ -80,6 +85,21 @@ const Sprint = () => {
     setMainWord(mainWord);
 
     getSecondWord(mainWord);
+  };
+
+  const showIndicator = (isTrueAnswer) => {
+    const currentClass = "sprint__game-area__indicator__item__show";
+    if (isTrueAnswer) {
+      indicatorTrue.current.classList.add(currentClass);
+    } else {
+      indicatorFalse.current.classList.add(currentClass);
+    }
+
+    setTimeout(() => {
+      indicatorTrue.current.classList.remove(currentClass)
+      indicatorFalse.current.classList.remove(currentClass)
+    }, 500);
+
   };
 
   const countRightAnswer = () => {
@@ -101,6 +121,8 @@ const Sprint = () => {
     setRightAnswerList(currentRightAnswerList);
 
     setScore(score + pointsPerWord);
+
+    showIndicator(true);
   };
 
   const countWrongAnswer = () => {
@@ -114,6 +136,8 @@ const Sprint = () => {
     const currentWrondAnswerList = wrongAnswerList;
     currentWrondAnswerList.push(mainWord);
     setWrongAnswerList(currentWrondAnswerList);
+
+    showIndicator(false);
   };
 
   // TODO: post request after answer, and save in localStorage
@@ -178,7 +202,7 @@ const Sprint = () => {
       className="sprint__game-area__streak__right-answer"
     />
   );
-  
+
   const ShowWinStreak = () => {
     if (pointsPerWord === 80) {
       return rightAnswerCircle;
@@ -197,7 +221,7 @@ const Sprint = () => {
   return (
     <div className="sprint">
       <header className="sprint__header">
-        <SprintTimer setIsTimeUp={setIsTimeUp}/>
+        <SprintTimer setIsTimeUp={setIsTimeUp} />
         <div className="sprint__header__btns">
           <img
             alt="sound btn"
@@ -215,9 +239,7 @@ const Sprint = () => {
       <div className="sprint__game-area">
         <p className="sprint__game-area__total-score">{score}</p>
         <div className="sprint__game-area__wrapper">
-          <div className="sprint__game-area__streak">
-            {ShowWinStreak()}
-          </div>
+          <div className="sprint__game-area__streak">{ShowWinStreak()}</div>
           <p className="sprint__game-area__current-points">
             +{pointsPerWord} очков за слово
           </p>
@@ -239,8 +261,18 @@ const Sprint = () => {
             {secondWord.wordTranslate}
           </p>
           <div className="sprint__game-area__indicator">
-            {/* TODO: indicator */}
-            {/* <img src={circleCorrectAnswer} alt="правильный ответ" /> */}
+            <img
+              src={circleCorrectAnswerSrc}
+              alt="правильный ответ"
+              ref={indicatorTrue}
+              className="sprint__game-area__indicator__item"
+            />
+            <img
+              src={circleWrongAnswerSrc}
+              alt="неправильный ответ"
+              ref={indicatorFalse}
+              className="sprint__game-area__indicator__item"
+            />
           </div>
           <div className="sprint__game-area__answer-btn">
             <p

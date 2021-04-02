@@ -88,6 +88,15 @@
             height: 44px;
             display: flex;
             justify-content: center;
+
+            &__item {
+                display: none;
+                &__show {
+                    display: flex;
+                }
+            }
+
+
         }
         &__answer-btn {
             display: flex;
