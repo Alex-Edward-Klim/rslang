@@ -53,7 +53,7 @@
 }
 
 .word-cards {
-  margin: 16px auto 0;
+  margin: 16px auto 16px;
   max-width: 1120px;
   width: 100%;
   display: flex;
@@ -75,7 +75,6 @@
     }
     &__flags {
       display: flex;
-      justify-content: space-between;
       max-width: 520px;
       width: 100%;
     }

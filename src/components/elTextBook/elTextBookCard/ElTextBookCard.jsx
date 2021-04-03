@@ -5,10 +5,12 @@ import { getSettingsFromState } from "../../../redux/selectors";
 import "./ElTextBookCard.scss";
 import soundImg from "../../../img/sound.png";
 import handlerWords from "../../../Utils/handlerWords";
+import { useLocation } from "react-router";
 
-function ElTextBookCard({ wordElement, correct, wrong, removeHandler }) {
+function ElTextBookCard({ wordElement, correct, wrong, removeHandler, typeOfWords }) {
   const {
     _id,
+    page,
     word,
     image,
     audio,
@@ -24,7 +26,7 @@ function ElTextBookCard({ wordElement, correct, wrong, removeHandler }) {
 
   const { userId, token } = useSelector(getUserDataFromState);
   const { translate, changeWordStatus } = useSelector(getSettingsFromState);
-
+  const location = useLocation();
   const initIsHard = wordElement?.userWord?.difficulty === "compound_word";
 
   const [isHard, setIsHard] = useState(initIsHard);
@@ -43,7 +45,11 @@ function ElTextBookCard({ wordElement, correct, wrong, removeHandler }) {
     handlerWords(userId, token, wordElement, "deleted_word");
     removeHandler(_id);
   };
-
+  const recoverWordHandler = () => {
+    handlerWords(userId, token, wordElement, "reconstitute");
+    removeHandler(_id);
+  };
+  
   return (
     <div
       className={`word-card ${userId && changeWordStatus ? "reg" : null} ${
@@ -116,16 +122,29 @@ function ElTextBookCard({ wordElement, correct, wrong, removeHandler }) {
       </div>
       {userId && changeWordStatus && (
         <div className="word-settings">
-          <div className="word-settings__header">Добавить в раздел:</div>
+          <div className="word-settings__header">
+            {location.pathname === "/vocabulary"
+              ? `Страница ${+page + 1}`
+              : "Добавить в раздел:"}
+          </div>
           <div className="word-settings__main">
+            { typeOfWords === "deleted_word" || typeOfWords === "compound_word" ? null : (
+              <button
+                className={`word-settings__place ${isHard ? "hard" : null}`}
+                onClick={hardWordHandler}
+              >
+                {isHard ? "Сложное слово" : "Добавить в сложные"}
+              </button>
+            )}
             <button
-              className={`word-settings__place ${isHard ? "hard" : null}`}
-              onClick={hardWordHandler}
+              className="word-settings__place"
+              onClick={
+                typeOfWords === "deleted_word" || typeOfWords === "compound_word"
+                  ? recoverWordHandler
+                  : delWordHandler
+              }
             >
-              {isHard ? "Сложное слово" : "Добавить в сложные"}
-            </button>
-            <button className="word-settings__place" onClick={delWordHandler}>
-              Удалить
+              {typeOfWords === "deleted_word" || typeOfWords === "compound_word" ? "Восстановить" : "Удалить"}
             </button>
           </div>
         </div>

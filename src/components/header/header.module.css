@@ -1,6 +1,5 @@
 body{
     margin: 0 auto;
-    padding: 0 calc(20px - (100vw - 100%)) 0 0;
 }
 header{
     height: 87px;
@@ -8,6 +7,7 @@ header{
     font-family: Roboto;
     font-style: normal;
     color: #000D83;
+    padding: 0 calc(20px - (100vw - 100%)) 0 0;
 }
 .headerContainer{
     max-width: 1457px;
@@ -35,6 +35,7 @@ header{
     text-decoration: none;
     cursor: pointer;
     position: relative;
+    
 }
 .listItem::after,
 .dropdownItem::after,

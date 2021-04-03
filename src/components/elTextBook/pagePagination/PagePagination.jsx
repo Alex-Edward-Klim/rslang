@@ -6,14 +6,14 @@ import "./pagePagination.scss";
 import arrowL from "../../../img/arrowL.png";
 import arrowR from "../../../img/arrowR.png";
 
-function PagePagination() {
+function PagePagination({maxPage}) {
   const { group, page } = useSelector(getWordsGroupAndPageFromState);
   const dispatch = useDispatch();
 
   let buttonLeftClass = "page-pagination__block left";
   if (page === 0) buttonLeftClass += " disable";
   let buttonRightClass = "page-pagination__block right";
-  if (page === 29) buttonRightClass += " disable";
+  if (page === maxPage) buttonRightClass += " disable";
 
   return (
     <div className="page-pagination">
@@ -29,7 +29,7 @@ function PagePagination() {
       <div className="page-pagination__block  number">{page + 1}</div>
       <button
         className={buttonRightClass}
-        disabled={page === 29}
+        disabled={page === maxPage}
         onClick={() =>
           dispatch(setWordsGroupAndPage({ group, page: page + 1 }))
         }

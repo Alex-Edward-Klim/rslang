@@ -80,9 +80,10 @@ function ElTextBook() {
       return (
         <ElTextBookCard
           key={el._id}
+          typeOfWords={'textBook'}
           wordElement={el}
-          correct={el?.options?.correct_otvet ? el.options.correct_otvet : 0}
-          wrong={el?.options?.wrong_otvet ? el.options.wrong_otvet : 0}
+          correct={el?.userWord?.options?.correct_otvet ? el.userWord.optional.correct_otvet : 0}
+          wrong={el?.userWord?.options?.wrong_otvet ? el.userWord.optional.wrong_otvet : 0}
           removeHandler={removeHandler}
         />
       );
@@ -99,7 +100,7 @@ function ElTextBook() {
           </div>
           <div className="text-book-nav__option">
             <div className="text-book-nav__group">
-              <PagePagination />
+              <PagePagination maxPage={29} />
             </div>
             <div className="text-book-nav__game">{games}</div>
           </div>
@@ -114,7 +115,7 @@ function ElTextBook() {
           )}
         </div>
         <div className="text-book-nav__group">
-          <PagePagination />
+          <PagePagination maxPage={29} />
         </div>
       </div>
     </>
