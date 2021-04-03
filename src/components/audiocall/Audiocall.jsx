@@ -49,7 +49,9 @@ const Audiocall = () => {
   const addAnimation = (element, elementClass, delay) => {
     element.current.classList.add(elementClass);
     setTimeout(() => {
-      element.current.classList.remove(elementClass);
+      if (element.current) {
+        element.current.classList.remove(elementClass);
+      }
     }, delay);
   };
 
