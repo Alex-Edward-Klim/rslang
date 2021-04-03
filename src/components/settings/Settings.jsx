@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Checkbox from "@material-ui/core/Checkbox";
-import { NavLink } from "react-router-dom";
-import Button from "@material-ui/core/Button";
 import { getSettingsFromState } from "../../redux/selectors";
 import { setSettings } from "../../redux/settings/settingsActions";
 import s from './settings.module.scss'

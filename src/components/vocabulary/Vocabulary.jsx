@@ -2,49 +2,40 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import vocImg from "../../img/how-to-choose-english-dictionary.png";
 import s from "./vocabulary.module.scss";
+import cn from "classnames";
 import {
   getUserDataFromState,
   getWordsGroupAndPageFromState,
 } from "../../redux/selectors";
-import axios from "axios";
 import ElTextBookCard from "../elTextBook/elTextBookCard/ElTextBookCard";
 import GroupFlags from "../elTextBook/groupFlags/GroupFlags";
 import GameCard from "../elTextBook/gameCard/GameCard";
 import PagePagination from "../elTextBook/pagePagination/PagePagination";
 import { setWordsGroupAndPage } from "../../redux/wordsGroupAndPage/wordsGroupAndPageActions";
 import { gameList } from "../../modules/GameList";
+import requestVocabulary from "../../Utils/requestVocabulary";
 
 function Vocabulary() {
   const { userId, token } = useSelector(getUserDataFromState);
   const { group, page } = useSelector(getWordsGroupAndPageFromState);
   const [wordsList, setWordList] = useState(null);
+  const [length, setLength] = useState(null);
+  const [typeOfWords, setTypeOfWords] = useState("studied_word");
   const dispatch = useDispatch();
 
-  const CancelToken = axios.CancelToken;
-
-  const url = `https://rslang-server-2021.herokuapp.com/users/${userId}/aggregatedWords`;
-
   useEffect(() => {
-    let cancel;
-    axios(url, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      params: { group, page, wordsPerPage: 20 },
-      cancelToken: new CancelToken(function executor(c) {
-        cancel = c;
-      }),
-    })
-      .then((response) => {
-        const data = userId ? response.data[0].paginatedResults : response.data;
-        return setWordList(data);
-      })
-      .catch((err) => console.log(err.message));
-    return () => {
-      cancel("Please don't click too fast ...");
-    };
-  }, [group, page, userId]);
+    requestVocabulary(
+      token,
+      userId,
+      group,
+      page,
+      typeOfWords,
+      setWordList,
+      setLength
+    );
+  }, [group, page, userId, typeOfWords]);
 
+  const maxPage = Math.floor(length / 20)
   const handleFlagClick = (n) => {
     dispatch(setWordsGroupAndPage({ group: n, page: 0 }));
   };
@@ -68,25 +59,32 @@ function Vocabulary() {
 
   let wordCards;
   if (wordsList !== null) {
-    let words = [...wordsList];
-    if (userId) {
-      // setWordList(prev => prev.filter(word => word?.userWord?.difficulty !== 'deleted_word'))
-      words = wordsList.filter(
-        (el) => el?.userWord?.difficulty !== "deleted_word"
-      );
-    }
-    wordCards = words.map((el, i) => {
+    wordCards = wordsList.map((el, i) => {
       return (
         <ElTextBookCard
           key={el._id}
+          typeOfWords={typeOfWords}
           wordElement={el}
-          correct={el?.options?.correct_otvet ? el.options.correct_otvet : 0}
-          wrong={el?.options?.wrong_otvet ? el.options.wrong_otvet : 0}
+          correct={
+            el?.userWord?.optional?.correct_otvet
+              ? el.userWord.optional.correct_otvet
+              : 0
+          }
+          wrong={
+            el?.userWord?.optional?.wrong_otvet
+              ? el.userWord.optional.wrong_otvet
+              : 0
+          }
           removeHandler={removeHandler}
         />
       );
     });
   }
+
+  const typeWordsHandler = (typeName) => {
+    setTypeOfWords(typeName);
+    dispatch(setWordsGroupAndPage({ group, page: 0 }));
+  };
 
   return (
     <div className={s.vocabulary}>
@@ -95,26 +93,51 @@ function Vocabulary() {
         <h2>Словарь</h2>
       </div>
       <ul className={s.typeWord}>
-        <li className={s.typeWordEl}>Изучаемые слова</li>
-        <li className={s.typeWordEl}>Сложные слова</li>
-        <li className={s.typeWordEl}>Удаленные слова</li>
+        <li
+          onClick={() => typeWordsHandler("studied_word")}
+          className={cn(
+            s.typeWordEl,
+            typeOfWords === "studied_word" ? s.active : null
+          )}
+        >
+          Изучаемые слова
+        </li>
+        <li
+          onClick={() => typeWordsHandler("compound_word")}
+          className={cn(
+            s.typeWordEl,
+            typeOfWords === "compound_word" ? s.active : null
+          )}
+        >
+          Сложные слова
+        </li>
+        <li
+          onClick={() => typeWordsHandler("deleted_word")}
+          className={cn(
+            s.typeWordEl,
+            typeOfWords === "deleted_word" ? s.active : null
+          )}
+        >
+          Удаленные слова
+        </li>
       </ul>
       <div className="text-book-nav__flags flags">{flags}</div>
       <div className="text-book-nav__option">
         <div className="text-book-nav__group">
-          <PagePagination />
+          {length !== null && length > 20 && <PagePagination maxPage={maxPage} />}
         </div>
         <div className="text-book-nav__game">{games}</div>
       </div>
       <div className="word-cards">
         {wordsList === null ? (
-          <h2>Loading...</h2>
-        ) : wordCards.length === 0 ? (
+          <h2>This page is empty</h2>
+        ) : length === undefined ? (
           <h2>This page is empty</h2>
         ) : (
           wordCards
         )}
       </div>
+      {length !== null && length > 20 && <PagePagination maxPage={maxPage} />}
     </div>
   );
 }
