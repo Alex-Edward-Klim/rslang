@@ -15,15 +15,15 @@ import { useEffect, useRef, useState } from "react";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import axios from "axios";
 import SprintTimer from "./sprintTimer/SprintTimer";
+import { Redirect, useParams } from "react-router";
 
-const Sprint = () => {
+const Sprint = (props) => {
   // TODO: change api url
   const apiUrl = "https://rslang-server-2021.herokuapp.com";
   const wordListUrl = `${apiUrl}/words`;
   // TODO: вынести в компоненты: audio,
   // const [isAudioOn, setIsAudioOn] = useState(false);
 
-  const [wordList, setWordList] = useState();
   const [score, setScore] = useState(0);
   const [pointsPerWord, setPointsPerWord] = useState(10);
   const [isTimeUp, setIsTimeUp] = useState(false);
@@ -39,6 +39,14 @@ const Sprint = () => {
   const indicatorFalse = useRef(null);
 
   const screen = useFullScreenHandle();
+
+  const { launchmodule } = useParams();
+
+  const propsData = props.location.propsData;
+  let wordList = null;
+  if (propsData) {
+    wordList = propsData.data;
+  }
 
   let birdsQuantity = 1;
   switch (pointsPerWord) {
@@ -93,10 +101,9 @@ const Sprint = () => {
     }
 
     setTimeout(() => {
-      indicatorTrue.current.classList.remove(currentClass)
-      indicatorFalse.current.classList.remove(currentClass)
+      indicatorTrue.current.classList.remove(currentClass);
+      indicatorFalse.current.classList.remove(currentClass);
     }, 500);
-
   };
 
   const countRightAnswer = () => {
@@ -165,14 +172,6 @@ const Sprint = () => {
   };
 
   useEffect(() => {
-    const currentUrl = wordListUrl;
-    axios.get(currentUrl).then((resp) => {
-      const allWords = resp.data;
-      setWordList(allWords);
-    });
-  }, []);
-
-  useEffect(() => {
     // TODO: add endGameScreen
     if (isTimeUp) {
       console.log("end game");
@@ -184,22 +183,20 @@ const Sprint = () => {
   }, [wordList, round]);
 
   useEffect(() => {
-    const checkAnswerWithKeyboard = ({key}) => {
-
+    const checkAnswerWithKeyboard = ({ key }) => {
       if (key === "ArrowLeft") {
         checkAnswerFalse();
       } else if (key === "ArrowRight") {
         checkAnswerTrue();
       }
     };
-    
 
-    window.addEventListener('keydown', checkAnswerWithKeyboard);
+    window.addEventListener("keydown", checkAnswerWithKeyboard);
 
     return () => {
-      window.removeEventListener('keydown', checkAnswerWithKeyboard);
-    }
-  }, [isCorrectTranslation, round])
+      window.removeEventListener("keydown", checkAnswerWithKeyboard);
+    };
+  }, [isCorrectTranslation, round]);
 
   const bird = (
     <img
@@ -231,95 +228,99 @@ const Sprint = () => {
     );
   };
 
-  if (!wordList || wordList.length === 0) return <p>Загрузка...</p>;
-
-  const contentPage = (<div className="sprint">
-  <div className="sprint__header">
-    <SprintTimer setIsTimeUp={setIsTimeUp} />
-    <div className="sprint__header__btns">
-      {/* <img
+  const contentPage = (
+    <div className="sprint">
+      <div className="sprint__header">
+        <SprintTimer setIsTimeUp={setIsTimeUp} />
+        <div className="sprint__header__btns">
+          {/* <img
         alt="sound btn"
         className="sprint__header__btns__audio"
         src={audioOff}
       /> */}
-      <img
-        alt="full screen btn"
-        className="sprint__header__btns__exit"
-        src={fullscreenImg}
-        onClick={screen.active ? screen.exit : screen.enter}
-      />
-    </div>
-  </div>
-  <div className="sprint__game-area">
-    <p className="sprint__game-area__total-score">{score}</p>
-    <div className="sprint__game-area__wrapper">
-      <div className="sprint__game-area__streak">{ShowWinStreak()}</div>
-      <p className="sprint__game-area__current-points">
-        +{pointsPerWord} очков за слово
-      </p>
-      <div className="sprint__game-area__birds-wrapper">
-        <div className="sprint__game-area__birds-wrapper__birds">
-          {bird}
-          {birdsQuantity > 1 && bird}
-          {birdsQuantity > 2 && bird}
-          {birdsQuantity > 3 && bird}
+          <img
+            alt="full screen btn"
+            className="sprint__header__btns__exit"
+            src={fullscreenImg}
+            onClick={screen.active ? screen.exit : screen.enter}
+          />
         </div>
-        <img
-          src={branchImg}
-          alt="branch"
-          className="sprint__game-area__birds-wrapper__branch"
-        />
       </div>
-      <p className="sprint__game-area__main-word">{mainWord.word}</p>
-      <p className="sprint__game-area__second-word">
-        {secondWord.wordTranslate}
-      </p>
-      <div className="sprint__game-area__indicator">
-        <img
-          src={circleCorrectAnswerSrc}
-          alt="правильный ответ"
-          ref={indicatorTrue}
-          className="sprint__game-area__indicator__item"
-        />
-        <img
-          src={circleWrongAnswerSrc}
-          alt="неправильный ответ"
-          ref={indicatorFalse}
-          className="sprint__game-area__indicator__item"
-        />
+      <div className="sprint__game-area">
+        <p className="sprint__game-area__total-score">{score}</p>
+        <div className="sprint__game-area__wrapper">
+          <div className="sprint__game-area__streak">{ShowWinStreak()}</div>
+          <p className="sprint__game-area__current-points">
+            +{pointsPerWord} очков за слово
+          </p>
+          <div className="sprint__game-area__birds-wrapper">
+            <div className="sprint__game-area__birds-wrapper__birds">
+              {bird}
+              {birdsQuantity > 1 && bird}
+              {birdsQuantity > 2 && bird}
+              {birdsQuantity > 3 && bird}
+            </div>
+            <img
+              src={branchImg}
+              alt="branch"
+              className="sprint__game-area__birds-wrapper__branch"
+            />
+          </div>
+          <p className="sprint__game-area__main-word">{mainWord.word}</p>
+          <p className="sprint__game-area__second-word">
+            {secondWord.wordTranslate}
+          </p>
+          <div className="sprint__game-area__indicator">
+            <img
+              src={circleCorrectAnswerSrc}
+              alt="правильный ответ"
+              ref={indicatorTrue}
+              className="sprint__game-area__indicator__item"
+            />
+            <img
+              src={circleWrongAnswerSrc}
+              alt="неправильный ответ"
+              ref={indicatorFalse}
+              className="sprint__game-area__indicator__item"
+            />
+          </div>
+          <div className="sprint__game-area__answer-btn">
+            <p
+              className="sprint__game-area__answer-btn__wrong sprint__game-area__answer-btn__btn"
+              onClick={checkAnswerFalse}
+            >
+              Неверно
+            </p>
+            <p
+              className="sprint__game-area__answer-btn__right sprint__game-area__answer-btn__btn"
+              onClick={checkAnswerTrue}
+            >
+              Верно
+            </p>
+          </div>
+        </div>
       </div>
-      <div className="sprint__game-area__answer-btn">
-        <p
-          className="sprint__game-area__answer-btn__wrong sprint__game-area__answer-btn__btn"
-          onClick={checkAnswerFalse}
-        >
-          Неверно
-        </p>
-        <p
-          className="sprint__game-area__answer-btn__right sprint__game-area__answer-btn__btn"
-          onClick={checkAnswerTrue}
-        >
-          Верно
-        </p>
+      <div className="sprint__keyboard-btns">
+        <img alt="left arrow" src={leftArrow} onClick={checkAnswerFalse} />
+        <img alt="right arrow" src={rightArrow} onClick={checkAnswerTrue} />
       </div>
     </div>
-  </div>
-  <div className="sprint__keyboard-btns">
-    <img alt="left arrow" src={leftArrow} onClick={checkAnswerFalse} />
-    <img alt="right arrow" src={rightArrow} onClick={checkAnswerTrue} />
-  </div>
-</div>);
+  );
 
-  const fullScreenContentPage = (<div className="sprint__fullscreen">
-    {contentPage}
-  </div>);
+  const fullScreenContentPage = (
+    <div className="sprint__fullscreen">{contentPage}</div>
+  );
 
-  console.log(screen.active)
   return (
-    <FullScreen handle={screen}>
-      {screen.active ? fullScreenContentPage : contentPage}
-
-    </FullScreen>
+    <>
+      {wordList === null ? (
+        <Redirect to={`/startgame/sprint/${launchmodule}`} />
+      ) : (
+        <FullScreen handle={screen}>
+          {screen.active ? fullScreenContentPage : contentPage}
+        </FullScreen>
+      )}
+    </>
   );
 };
 
