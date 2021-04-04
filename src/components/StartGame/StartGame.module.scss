@@ -1,4 +1,4 @@
-@import "../../../extends.scss";
+@import "../../extends.scss";
 
 .section {
     width: 100%;
@@ -34,7 +34,7 @@
 
 .control {
     width: 80%;
-    height: 150px;
+    height: 70px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -87,6 +87,7 @@
     width: 320px;
     height: 230px;
     background: center / cover no-repeat;
+    z-index: -1;
 }
 
 .girl {
@@ -106,5 +107,27 @@
     top: 30px;
     right: 30px;
     font-size: 40px;
+    line-height: 1;
     color: black;
+}
+
+.settings {
+    position: absolute;
+    top: 30px;
+    right: calc( 30px + 20px + 40px);
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    background: center / cover no-repeat;
+    background-image: url("./assets/gear.svg");
+}
+
+.flagWrapper {
+    position: absolute;    
+    display: flex;
+    top: 55px;
+    left: -240px;
+    width: 350px;
+    justify-content: space-between;
+    align-items: start;    
 }

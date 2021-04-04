@@ -4,9 +4,9 @@ import Login from "../login/Login";
 import Signup from "../signup/Signup";
 import ElTextBook from "../elTextBook/ElTextBook";
 import MainPage from "../mainPage/MainPage";
-import GameMemoryStart from "../GameMemory/GameMemoryStart/GameMemoryStart";
+import StartGame from "../StartGame/StartrGame";
+import GetDataForGame from "../StartGame/GetDataForGame";
 import GameMemory from "../GameMemory/GameMemory";
-// import Example from "../GameMemory/example";
 import Audiocall from "../audiocall/Audiocall";
 import Vocabulary from "../vocabulary/Vocabulary";
 import Footer from "../footer/Footer";
@@ -34,17 +34,9 @@ const Container = () => {
             <Route path="/elTextBook" render={() => <ElTextBook />} />
             <Route path="/vocabulary" render={() => <Vocabulary />} />
             <Route path="/settings" render={() => <Settings />} />
-            <Route
-              path="/game_memory_start/:id"
-              exact
-              render={() => <GameMemoryStart />}
-            />
-            <Route
-              path="/game_memory/:id"
-              exact
-              render={(props) => <GameMemory {...props} />}
-            />
-            {/* <Route path="/example/:id" exact render={props => <Example {...props} />} /> */}
+            <Route path="/startgame/:game/:launchmodule" render={() => <StartGame />} />
+            <Route path="/getdataforgame/:game/:launchmodule" render={props => <GetDataForGame {...props} />} />
+            <Route path="/memory/:launchmodule" exact render={props => <GameMemory {...props} />} />
             <Route path="/audiocall" exact render={() => <Audiocall />} />
             <Route path="*" render={() => <Redirect to="/" />} />
           </Switch>
