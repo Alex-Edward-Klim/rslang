@@ -16,6 +16,7 @@ import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import axios from "axios";
 import SprintTimer from "./sprintTimer/SprintTimer";
 import { Redirect, useParams } from "react-router";
+import StopGame from "../StopGame/StopGame";
 
 const Sprint = (props) => {
   // TODO: change api url
@@ -172,13 +173,6 @@ const Sprint = (props) => {
   };
 
   useEffect(() => {
-    // TODO: add endGameScreen
-    if (isTimeUp) {
-      console.log("end game");
-    }
-  }, [isTimeUp]);
-
-  useEffect(() => {
     renderGame();
   }, [wordList, round]);
 
@@ -320,6 +314,12 @@ const Sprint = (props) => {
           {screen.active ? fullScreenContentPage : contentPage}
         </FullScreen>
       )}
+      {isTimeUp && (<StopGame propsStop={{
+        // otvetCorrect: rightAnswerList,
+        // otvetWrong: wrongAnswerList,
+        game: "sprint",
+        launchmodule: props.launchmodule,
+    }} />)}
     </>
   );
 };
