@@ -35,7 +35,9 @@ function Vocabulary() {
     );
   }, [group, page, userId, typeOfWords]);
 
-  const maxPage = Math.floor(length / 20)
+  let allCorrect = 0;
+  let allWrong = 0;
+  const maxPage = Math.floor(length / 20);
   const handleFlagClick = (n) => {
     dispatch(setWordsGroupAndPage({ group: n, page: 0 }));
   };
@@ -59,6 +61,15 @@ function Vocabulary() {
 
   let wordCards;
   if (wordsList !== null) {
+    allCorrect = wordsList.reduce(
+      (acc, el) => acc + el?.userWord?.optional?.correct_otvet,
+      0
+    );
+    allWrong = wordsList.reduce(
+      (acc, el) => acc + el?.userWord?.optional?.wrong_otvet,
+      0
+    );
+
     wordCards = wordsList.map((el, i) => {
       return (
         <ElTextBookCard
@@ -121,12 +132,21 @@ function Vocabulary() {
           Удаленные слова
         </li>
       </ul>
+      <ul className={s.pageStatistic}>
+        <li>{`Слов на этой странице:  ${wordCards?.length ? wordCards.length : 0}`}</li>
+        <li>{`Всего верных ответов: ${allCorrect ? allCorrect : 0}`}</li>
+        <li>{`Всего неверных ответов: ${allWrong ? allWrong : 0}`}</li>
+      </ul>
       <div className="text-book-nav__flags flags">{flags}</div>
       <div className="text-book-nav__option">
         <div className="text-book-nav__group">
-          {length !== null && length > 20 && <PagePagination maxPage={maxPage} />}
+          {length !== null && length > 20 && (
+            <PagePagination maxPage={maxPage} />
+          )}
         </div>
-        <div className="text-book-nav__game">{games}</div>
+        {typeOfWords === "studied_word" ? null : (
+          <div className="text-book-nav__game">{games}</div>
+        )}
       </div>
       <div className="word-cards">
         {wordsList === null ? (
