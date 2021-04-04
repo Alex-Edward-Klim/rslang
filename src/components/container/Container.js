@@ -12,6 +12,7 @@ import Vocabulary from "../vocabulary/Vocabulary";
 import Footer from "../footer/Footer";
 import Settings from "../settings/Settings";
 import Header from "../header/Header";
+import Sprint from "../sprint/Sprint";
 
 const Container = () => {
   return (
@@ -37,11 +38,11 @@ const Container = () => {
             <Route path="/startgame/:game/:launchmodule" render={() => <StartGame />} />
             <Route path="/getdataforgame/:game/:launchmodule" render={props => <GetDataForGame {...props} />} />
             <Route path="/memory/:launchmodule" exact render={props => <GameMemory {...props} />} />
-            <Route path="/audiocall" exact render={() => <Audiocall />} />
+            <Route path="/sprint/:launchmodule" exact render={props => <Sprint {...props} />} />
             <Route path="*" render={() => <Redirect to="/" />} />
           </Switch>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
     </>
   );
