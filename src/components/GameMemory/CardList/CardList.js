@@ -7,7 +7,7 @@ import handlerWords from '../../../Utils/handlerWords';
 import s from './CardList.module.scss';
 
 import Card from '../Card/Card';
-import Footer from '../../footer/Footer';
+import StopGame from '../../StopGame/StopGame'
 
 const CardList = props => {
     const data = props.data.concat();
@@ -37,7 +37,9 @@ const CardList = props => {
                 setOpenCard([]);
                 setOtvetCorrect(otvetCorrect + 1);
                 // верный ответ - отправим данные на сервер
-                handlerWords(userId, token, data[index], "game", true);
+                if (userId) {
+                    handlerWords(userId, token, data[index], "game", true);
+                }
             } else {
                 const find = firstOpenCard.findIndex(item => item._id === data[openCard[0]]._id && item.index !== openCard[0]);
                 if (find !== -1) {
@@ -47,7 +49,9 @@ const CardList = props => {
                     setOpenCard([index]);
                     setOtvetWrong(otvetWrong + 1);
                     // не верный ответ - отправим данные на сервер
-                    handlerWords(userId, token, data[openCard[0]], "game", false);
+                    if (userId) {
+                        handlerWords(userId, token, data[openCard[0]], "game", false);
+                    }
                 } else {
                     const openCardCopy = openCard.concat();
                     openCardCopy.push(index);
@@ -70,10 +74,13 @@ const CardList = props => {
         <>
             <section className={s.section}>
                 { data.map( (item, index) => <Card wordCard={item} imgRender={props.imgRender} fu={ handlerClick } key={index}/> ) }
-                { 2 * otvetCorrect + 2 * otvetWrong === data.length ? 
-                    <p className={s.end}>КОНЕЦ</p> : null}
+                { 2 * otvetCorrect + 2 * otvetWrong === data.length ? <StopGame propsStop={{
+                    otvetCorrect: otvetCorrect,
+                    otvetWrong: otvetWrong,
+                    game: "memory",
+                    launchmodule: props.launchmodule,
+                }} /> : null}
             </section>
-            {/* <Footer /> */}
         </>
     )
 };

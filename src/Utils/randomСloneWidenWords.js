@@ -3,8 +3,13 @@ const random = (maxNum, minNum = 0) => minNum + Math.floor(Math.random() * (maxN
 const randomСloneWidenWords = arr => {
     const data = [];
     arr.forEach(item => {
-        data.push({...item, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
-        data.push({...item, word: item.wordTranslate, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
+        if (item.id) {
+            data.push({...item, _id: item.id, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
+            data.push({...item, _id: item.id, word: item.wordTranslate, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
+        } else {
+            data.push({...item, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
+            data.push({...item, word: item.wordTranslate, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
+        }        
     });
     const dataRandom = [];
     const dataCopy = data.concat();
