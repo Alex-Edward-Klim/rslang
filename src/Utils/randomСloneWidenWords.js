@@ -4,11 +4,11 @@ const randomСloneWidenWords = arr => {
     const data = [];
     arr.forEach(item => {
         if (item.id) {
-            data.push({...item, _id: item.id, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
-            data.push({...item, _id: item.id, word: item.wordTranslate, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
+            data.push({...item, _id: item.id, wordCard: item.word, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
+            data.push({...item, _id: item.id, wordCard: item.wordTranslate, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
         } else {
-            data.push({...item, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
-            data.push({...item, word: item.wordTranslate, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
+            data.push({...item, wordCard: item.word, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
+            data.push({...item, wordCard: item.wordTranslate, face: false, correct_otvet: false, wrong_otvet: false, first_open: false});
         }        
     });
     const dataRandom = [];
