@@ -1,11 +1,11 @@
 .sprint {
-    max-width: 1140px;
+    width: 1140px;
     margin: 0 auto;
     color: #00037E;
     display: flex;
     flex-direction: column;
     text-align: center;
-    height: 100vh;
+    height: 70vh;
     justify-content: space-between;
     // align-items: center;
 
@@ -137,4 +137,30 @@
     }
 }
 
-// TODO: add adaptive
+@media(max-width: 1200px) {
+    .sprint {
+        width: 720px;
+    }
+}
+@media(max-width: 720px) {
+    .sprint {
+        width: 490px;
+        &__game-area {
+            max-width: 450px;
+        }
+        &__game-area {
+            &__birds-wrapper {
+                &__birds__item +  &__birds__item {
+                    padding-left: 1px;
+                }
+                &__branch {
+                    width: 350px;
+                }
+            }
+
+        }
+        &__keyboard-btns {
+            display: none;
+        }
+    }
+}

@@ -238,14 +238,14 @@ const Sprint = () => {
 
   return (
     <div className="sprint">
-      <header className="sprint__header">
+      <div className="sprint__header">
         <SprintTimer setIsTimeUp={setIsTimeUp} />
         <div className="sprint__header__btns">
-          <img
+          {/* <img
             alt="sound btn"
             className="sprint__header__btns__audio"
             src={audioOff}
-          />
+          /> */}
           <img
             alt="close btn"
             className="sprint__header__btns__exit"
@@ -253,7 +253,7 @@ const Sprint = () => {
             onClick={closeGame}
           />
         </div>
-      </header>
+      </div>
       <div className="sprint__game-area">
         <p className="sprint__game-area__total-score">{score}</p>
         <div className="sprint__game-area__wrapper">
