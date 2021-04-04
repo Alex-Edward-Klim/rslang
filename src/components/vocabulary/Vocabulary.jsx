@@ -12,7 +12,7 @@ import GroupFlags from "../elTextBook/groupFlags/GroupFlags";
 import GameCard from "../elTextBook/gameCard/GameCard";
 import PagePagination from "../elTextBook/pagePagination/PagePagination";
 import { setWordsGroupAndPage } from "../../redux/wordsGroupAndPage/wordsGroupAndPageActions";
-import { gameList } from "../../modules/GameList";
+import { gameListDeleted, gameListСompound } from "../../modules/GameList";
 import requestVocabulary from "../../Utils/requestVocabulary";
 
 function Vocabulary() {
@@ -55,7 +55,11 @@ function Vocabulary() {
     />
   ));
 
-  const games = gameList.map((el, i) => (
+  const gamesDeleted = gameListDeleted.map((el, i) => (
+    <GameCard name={el.name} path={el.route} key={Date.now() * 10 + i} />
+  ));
+
+  const gamesСompound = gameListСompound.map((el, i) => (
     <GameCard name={el.name} path={el.route} key={Date.now() * 10 + i} />
   ));
 
@@ -144,9 +148,8 @@ function Vocabulary() {
             <PagePagination maxPage={maxPage} />
           )}
         </div>
-        {typeOfWords === "studied_word" ? null : (
-          <div className="text-book-nav__game">{games}</div>
-        )}
+        { typeOfWords === "compound_word" ? <div className="text-book-nav__game">{gamesСompound}</div> : null }
+        { typeOfWords === "deleted_word" ? <div className="text-book-nav__game">{gamesDeleted}</div> : null }
       </div>
       <div className="word-cards">
         {wordsList === null ? (
