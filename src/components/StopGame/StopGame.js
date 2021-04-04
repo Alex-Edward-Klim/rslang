@@ -3,14 +3,23 @@ import { Link } from 'react-router-dom';
 
 import s from './StopGame.module.scss';
 
+import WordLine from './WordLine/WordLine';
+
 const StopGame = props => {
+    const {otvetCorrect, otvetWrong, launchmodule} = props.propsStop;
 
     return (
         <div className={s.stopWraper}>
-            <p>Правильные ответы: {props.propsStop.otvetCorrect}</p>
-            <p>Неправельные ответы: {props.propsStop.otvetWrong}</p>
-            { props.propsStop.launchmodule === "nav" || props.propsStop.launchmodule === "book" ? <Link to={'/elTextBook'}><button>ОК</button></Link> : null}
-            { props.propsStop.launchmodule === "compound" || props.propsStop.launchmodule === "deleted" ? <Link to={'/vocabulary'}><button>ОК</button></Link> : null}            
+            <h3>Правильные ответы: <span className={s.correct}>&emsp;{otvetCorrect.length}&emsp;</span></h3>
+            <div className={s.wraper}>
+                {otvetCorrect.map((item, index) => <WordLine key={`C + ${index}`} word={item}/>)}
+            </div>
+            <h3>Неправильные ответы: <span className={s.wrong}>&emsp;{otvetWrong.length}&emsp;</span></h3>
+            <div className={s.wraper}>
+                {otvetWrong.map((item, index) => <WordLine key={`W + ${index}`} word={item}/>)}
+            </div>
+            { launchmodule === "nav" || launchmodule === "book" ? <Link to={'/elTextBook'} className={s.close}>&#10060;</Link> : null}
+            { launchmodule === "compound" || launchmodule === "deleted" ? <Link to={'/vocabulary'} className={s.close}>&#10060;</Link> : null}
         </div>
     )
 };

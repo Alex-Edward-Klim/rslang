@@ -11,8 +11,8 @@ import StopGame from '../../StopGame/StopGame'
 
 const CardList = props => {
     const data = props.data.concat();
-    const [otvetCorrect, setOtvetCorrect] = useState(0);
-    const [otvetWrong, setOtvetWrong] = useState(0);
+    const [otvetCorrect, setOtvetCorrect] = useState([]);
+    const [otvetWrong, setOtvetWrong] = useState([]);
     const [openCard, setOpenCard] = useState([]);
     const [firstOpenCard, setFirstOpenCard] = useState([]);
     const { userId, token } = useSelector(getUserDataFromState);
@@ -26,6 +26,12 @@ const CardList = props => {
         }
     }
 
+    const saveResultOtvet = (otvet, fuOtvet, data) => {
+        const arr = otvet.concat();
+        arr.push(data);
+        fuOtvet(arr);
+    }
+
     const handlerClick = event => {
         const index = event.target.dataset.index;
         data[index].face = true;
@@ -35,8 +41,8 @@ const CardList = props => {
                 data[index].correct_otvet = true;
                 data[openCard[0]].correct_otvet = true;
                 setOpenCard([]);
-                setOtvetCorrect(otvetCorrect + 1);
-                // верный ответ - отправим данные на сервер
+                // верный ответ
+                saveResultOtvet(otvetCorrect, setOtvetCorrect, data[index]);
                 if (userId) {
                     handlerWords(userId, token, data[index], "game", true);
                 }
@@ -47,8 +53,8 @@ const CardList = props => {
                     data[firstOpenCard[find].index].wrong_otvet = true;
                     saveIndexFirstOpenCard(index);
                     setOpenCard([index]);
-                    setOtvetWrong(otvetWrong + 1);
-                    // не верный ответ - отправим данные на сервер
+                    // не верный ответ
+                    saveResultOtvet(otvetWrong, setOtvetWrong, data[openCard[0]]);
                     if (userId) {
                         handlerWords(userId, token, data[openCard[0]], "game", false);
                     }
@@ -74,7 +80,7 @@ const CardList = props => {
         <>
             <section className={s.section}>
                 { data.map( (item, index) => <Card wordCard={item} imgRender={props.imgRender} fu={ handlerClick } key={index}/> ) }
-                { 2 * otvetCorrect + 2 * otvetWrong === data.length ? <StopGame propsStop={{
+                { 2 * otvetCorrect.length + 2 * otvetWrong.length === data.length ? <StopGame propsStop={{
                     otvetCorrect: otvetCorrect,
                     otvetWrong: otvetWrong,
                     game: "memory",
