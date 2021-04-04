@@ -71,9 +71,61 @@ const GetDataForGame = props => {
                     break;
     
                 case "compound":
+                    const filterCompound = '{"userWord.difficulty":"compound_word"}';
+                    const urlCompound = `${head}/users/${userId}/aggregatedWords?group=${group}&page=${page}&wordsPerPage=20&filter=${filterCompound}`;
+                    const getDataCompound = async () => {
+                        try {
+                            const res = await axios.get(urlCompound, headers).then(res => res.data[0].paginatedResults);
+                            let result = [];
+                            if (res.length < wordCount) {
+                                if (page) {
+                                    const urlCompoundNew = `${head}/users/${userId}/aggregatedWords?group=${group}&page=${page - 1}&wordsPerPage=20&filter=${filterCompound}`;
+                                    const resData = await axios.get(urlCompoundNew, headers).then(res => res.data[0].paginatedResults);
+                                    const words = wordCount - res.length;
+                                    const resFilter = randomWords(resData, words);
+                                    result = res.concat(resFilter);
+                                } else {
+                                    result = res;
+                                };
+                            } else {
+                                result = randomWords(res, wordCount);
+                            };
+                            setData(result);
+                            setLoading(true);
+                        } catch (error) {
+                            console.log('GetDataForGame.js -> case "compound" + USER __ ERROR: ', error);
+                        };
+                    };
+                    getDataCompound();
                 break;
     
                 case "deleted":
+                    const filterDeleted = '{"userWord.difficulty":"deleted_word"}';
+                    const urlDeleted = `${head}/users/${userId}/aggregatedWords?group=${group}&page=${page}&wordsPerPage=20&filter=${filterDeleted}`;
+                    const getDataDeleted = async () => {
+                        try {
+                            const res = await axios.get(urlDeleted, headers).then(res => res.data[0].paginatedResults);
+                            let result = [];
+                            if (res.length < wordCount) {
+                                if (page) {
+                                    const urlDeletedNew = `${head}/users/${userId}/aggregatedWords?group=${group}&page=${page - 1}&wordsPerPage=20&filter=${filterDeleted}`;
+                                    const resData = await axios.get(urlDeletedNew, headers).then(res => res.data[0].paginatedResults);
+                                    const words = wordCount - res.length;
+                                    const resFilter = randomWords(resData, words);
+                                    result = res.concat(resFilter);
+                                } else {
+                                    result = res;
+                                };
+                            } else {
+                                result = randomWords(res, wordCount);
+                            };
+                            setData(result);
+                            setLoading(true);
+                        } catch (error) {
+                            console.log('GetDataForGame.js -> case "deleted" + USER __ ERROR: ', error);
+                        };
+                    };
+                    getDataDeleted();
                 break;
     
                 default:
@@ -118,12 +170,12 @@ const GetDataForGame = props => {
         };
     }, []);
 
-    const controlURLgame = game === "memory" || game === "audiocall"; // еще две игры
+    const controlURLgame = game === "memory" || game === "audiocall" || game === "sprint"; // еще одна игра
     const controlURLlaunchmodule = launchmodule === "nav" || launchmodule === "book" || launchmodule === "compound" || launchmodule === "deleted";
     if (!controlURLgame || !controlURLlaunchmodule) return <Redirect to={`/`} />;
     if (!settingsGame) return <Redirect to={`/startgame/${game}/${launchmodule}`} />
 
-    console.log(data)
+    // console.log(data)
 
     return (
         <>
