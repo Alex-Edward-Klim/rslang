@@ -17,8 +17,16 @@ const Container = () => {
   return (
     <>
       <BrowserRouter>
-        <Header />  
-        <div style={{ minHeight: "calc(100vh - 196px)", display: "flex", flexDirection: "column", alignItems:"center" }}>
+        <Header />
+        <div
+          style={{
+            minHeight: "calc(100vh - 196px)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "0 calc(20px - (100vw - 100%)) 0 calc(20px - (100vw - 100%))",
+          }}
+        >
           <Switch>
             <Route path="/" exact render={() => <MainPage />} />
             <Route path="/login" exact render={() => <Login />} />
