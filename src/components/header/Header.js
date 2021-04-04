@@ -63,7 +63,7 @@ function Header() {
           <NavLink className={styles.dropdownItem} to="/startgame/memory/nav">
             Карточки
           </NavLink>
-          <NavLink className={styles.dropdownItem} to="/">
+          <NavLink className={styles.dropdownItem} to="/startgame/sprint/nav">
             Спринт
           </NavLink>
         </ul>
