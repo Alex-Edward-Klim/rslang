@@ -13,15 +13,14 @@ import rightArrow from "./assets/images/rightArrow.png";
 
 import { useEffect, useRef, useState } from "react";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
-import axios from "axios";
 import SprintTimer from "./sprintTimer/SprintTimer";
 import { Redirect, useParams } from "react-router";
 import StopGame from "../StopGame/StopGame";
+import { useSelector } from "react-redux";
+import { getUserDataFromState } from '../../redux/selectors';
+import handlerWords from '../../Utils/handlerWords';
 
-const Sprint = (props) => {
-  // TODO: change api url
-  const apiUrl = "https://rslang-server-2021.herokuapp.com";
-  const wordListUrl = `${apiUrl}/words`;
+const Sprint = props => {
   // TODO: вынести в компоненты: audio,
   // const [isAudioOn, setIsAudioOn] = useState(false);
 
@@ -42,6 +41,8 @@ const Sprint = (props) => {
   const screen = useFullScreenHandle();
 
   const { launchmodule } = useParams();
+
+  const {userId, token} = useSelector(getUserDataFromState);
 
   const propsData = props.location.propsData;
   let wordList = null;
@@ -107,6 +108,12 @@ const Sprint = (props) => {
     }, 500);
   };
 
+  const sendWord = (isTrueAnswer) => {
+    if (userId) {
+      handlerWords(userId, token, mainWord, "game", isTrueAnswer);
+    }
+  }
+
   const countRightAnswer = () => {
     let currentWinStreak = winStreak;
 
@@ -145,16 +152,16 @@ const Sprint = (props) => {
     showIndicator(false);
   };
 
-  // TODO: post request after answer, and save in localStorage
+  // TODO:  save in localStorage
   const checkAnswerTrue = () => {
     if (isCorrectTranslation) {
       countRightAnswer();
 
-      // TODO: save right answer
+      sendWord(true);
     } else {
       countWrongAnswer();
 
-      // TODO: save wrong answer
+      sendWord(false);
     }
     setRound(round + 1);
   };
@@ -163,11 +170,11 @@ const Sprint = (props) => {
     if (!isCorrectTranslation) {
       countRightAnswer();
 
-      // TODO: save right answer
+      sendWord(true);
     } else {
       countWrongAnswer();
 
-      // TODO: save wrong answer
+      sendWord(false);
     }
     setRound(round + 1);
   };
@@ -314,6 +321,7 @@ const Sprint = (props) => {
           {screen.active ? fullScreenContentPage : contentPage}
         </FullScreen>
       )}
+      {/* TODO: uncomment */}
       {isTimeUp && (<StopGame propsStop={{
         // otvetCorrect: rightAnswerList,
         // otvetWrong: wrongAnswerList,
