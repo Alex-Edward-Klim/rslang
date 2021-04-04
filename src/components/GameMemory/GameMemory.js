@@ -12,7 +12,7 @@ const GameMemory = props => {
     return (
         <>
             { propsData
-                ? <CardList data={randomСloneWidenWords(propsData.data)} imgRender={propsData.imgRender} launchmodule={propsData.launchmodule}/> 
+                ? <CardList data={randomСloneWidenWords(propsData.data)} imgRender={propsData.imgRender} launchmodule={launchmodule}/> 
                 : <Redirect to={`/startgame/memory/${launchmodule}`} /> }
         </>
     )
