@@ -2,7 +2,7 @@ import "./sprint.scss";
 
 import audioOff from "./assets/icons/audioOff.png";
 import audioOn from "./assets/icons/audioOn.png";
-import closeImg from "./assets/icons/closeBtn.png";
+import fullscreenImg from "../../images/icons/fullscreen.png";
 import emptyCircleSrc from "./assets/icons/emptyCircle.png";
 import circleCorrectAnswerSrc from "./assets/icons/circleCorrectAnswer.png";
 import circleWrongAnswerSrc from "./assets/icons/circleWrongAnswer.png";
@@ -12,6 +12,7 @@ import leftArrow from "./assets/images/leftArrow.png";
 import rightArrow from "./assets/images/rightArrow.png";
 
 import { useEffect, useRef, useState } from "react";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import axios from "axios";
 import SprintTimer from "./sprintTimer/SprintTimer";
 
@@ -31,13 +32,13 @@ const Sprint = () => {
   const [mainWord, setMainWord] = useState("");
   const [secondWord, setSecondWord] = useState("");
   const [round, setRound] = useState(1);
+  const [rightAnswerList, setRightAnswerList] = useState([]);
+  const [wrongAnswerList, setWrongAnswerList] = useState([]);
 
   const indicatorTrue = useRef(null);
   const indicatorFalse = useRef(null);
 
-  // TODO: transfer to localStorage
-  const [rightAnswerList, setRightAnswerList] = useState([]);
-  const [wrongAnswerList, setWrongAnswerList] = useState([]);
+  const screen = useFullScreenHandle();
 
   let birdsQuantity = 1;
   switch (pointsPerWord) {
@@ -72,10 +73,6 @@ const Sprint = () => {
     setSecondWord(secondWord);
 
     return secondWord;
-  };
-
-  const closeGame = () => {
-    // TODO: link to main page
   };
 
   const renderGame = () => {
@@ -236,83 +233,93 @@ const Sprint = () => {
 
   if (!wordList || wordList.length === 0) return <p>Загрузка...</p>;
 
-  return (
-    <div className="sprint">
-      <div className="sprint__header">
-        <SprintTimer setIsTimeUp={setIsTimeUp} />
-        <div className="sprint__header__btns">
-          {/* <img
-            alt="sound btn"
-            className="sprint__header__btns__audio"
-            src={audioOff}
-          /> */}
-          <img
-            alt="close btn"
-            className="sprint__header__btns__exit"
-            src={closeImg}
-            onClick={closeGame}
-          />
+  const contentPage = (<div className="sprint">
+  <div className="sprint__header">
+    <SprintTimer setIsTimeUp={setIsTimeUp} />
+    <div className="sprint__header__btns">
+      {/* <img
+        alt="sound btn"
+        className="sprint__header__btns__audio"
+        src={audioOff}
+      /> */}
+      <img
+        alt="full screen btn"
+        className="sprint__header__btns__exit"
+        src={fullscreenImg}
+        onClick={screen.active ? screen.exit : screen.enter}
+      />
+    </div>
+  </div>
+  <div className="sprint__game-area">
+    <p className="sprint__game-area__total-score">{score}</p>
+    <div className="sprint__game-area__wrapper">
+      <div className="sprint__game-area__streak">{ShowWinStreak()}</div>
+      <p className="sprint__game-area__current-points">
+        +{pointsPerWord} очков за слово
+      </p>
+      <div className="sprint__game-area__birds-wrapper">
+        <div className="sprint__game-area__birds-wrapper__birds">
+          {bird}
+          {birdsQuantity > 1 && bird}
+          {birdsQuantity > 2 && bird}
+          {birdsQuantity > 3 && bird}
         </div>
+        <img
+          src={branchImg}
+          alt="branch"
+          className="sprint__game-area__birds-wrapper__branch"
+        />
       </div>
-      <div className="sprint__game-area">
-        <p className="sprint__game-area__total-score">{score}</p>
-        <div className="sprint__game-area__wrapper">
-          <div className="sprint__game-area__streak">{ShowWinStreak()}</div>
-          <p className="sprint__game-area__current-points">
-            +{pointsPerWord} очков за слово
-          </p>
-          <div className="sprint__game-area__birds-wrapper">
-            <div className="sprint__game-area__birds-wrapper__birds">
-              {bird}
-              {birdsQuantity > 1 && bird}
-              {birdsQuantity > 2 && bird}
-              {birdsQuantity > 3 && bird}
-            </div>
-            <img
-              src={branchImg}
-              alt="branch"
-              className="sprint__game-area__birds-wrapper__branch"
-            />
-          </div>
-          <p className="sprint__game-area__main-word">{mainWord.word}</p>
-          <p className="sprint__game-area__second-word">
-            {secondWord.wordTranslate}
-          </p>
-          <div className="sprint__game-area__indicator">
-            <img
-              src={circleCorrectAnswerSrc}
-              alt="правильный ответ"
-              ref={indicatorTrue}
-              className="sprint__game-area__indicator__item"
-            />
-            <img
-              src={circleWrongAnswerSrc}
-              alt="неправильный ответ"
-              ref={indicatorFalse}
-              className="sprint__game-area__indicator__item"
-            />
-          </div>
-          <div className="sprint__game-area__answer-btn">
-            <p
-              className="sprint__game-area__answer-btn__wrong sprint__game-area__answer-btn__btn"
-              onClick={checkAnswerFalse}
-            >
-              Неверно
-            </p>
-            <p
-              className="sprint__game-area__answer-btn__right sprint__game-area__answer-btn__btn"
-              onClick={checkAnswerTrue}
-            >
-              Верно
-            </p>
-          </div>
-        </div>
+      <p className="sprint__game-area__main-word">{mainWord.word}</p>
+      <p className="sprint__game-area__second-word">
+        {secondWord.wordTranslate}
+      </p>
+      <div className="sprint__game-area__indicator">
+        <img
+          src={circleCorrectAnswerSrc}
+          alt="правильный ответ"
+          ref={indicatorTrue}
+          className="sprint__game-area__indicator__item"
+        />
+        <img
+          src={circleWrongAnswerSrc}
+          alt="неправильный ответ"
+          ref={indicatorFalse}
+          className="sprint__game-area__indicator__item"
+        />
       </div>
-      <div className="sprint__keyboard-btns">
-        <img alt="left arrow" src={leftArrow} />
-        <img alt="right arrow" src={rightArrow} />
+      <div className="sprint__game-area__answer-btn">
+        <p
+          className="sprint__game-area__answer-btn__wrong sprint__game-area__answer-btn__btn"
+          onClick={checkAnswerFalse}
+        >
+          Неверно
+        </p>
+        <p
+          className="sprint__game-area__answer-btn__right sprint__game-area__answer-btn__btn"
+          onClick={checkAnswerTrue}
+        >
+          Верно
+        </p>
       </div>
     </div>
+  </div>
+  <div className="sprint__keyboard-btns">
+    <img alt="left arrow" src={leftArrow} onClick={checkAnswerFalse} />
+    <img alt="right arrow" src={rightArrow} onClick={checkAnswerTrue} />
+  </div>
+</div>);
+
+  const fullScreenContentPage = (<div className="sprint__fullscreen">
+    {contentPage}
+  </div>);
+
+  console.log(screen.active)
+  return (
+    <FullScreen handle={screen}>
+      {screen.active ? fullScreenContentPage : contentPage}
+
+    </FullScreen>
   );
 };
 
