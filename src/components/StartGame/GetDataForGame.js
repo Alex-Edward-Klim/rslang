@@ -129,8 +129,7 @@ const GetDataForGame = props => {
         <>
             { loading ? <Redirect to={{ pathname: `/${game}/${launchmodule}`, propsData: {
                 data: data, 
-                imgRender: settingsGame.imgRender,
-                launchmodule: launchmodule,
+                imgRender: settingsGame.imgRender
             }}} /> : <p>Loading...</p> }
         </>
     );

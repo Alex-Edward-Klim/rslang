@@ -4,12 +4,12 @@ export const gameList = [
     route: "/savannah",
   },
   {
-    name: "Audio call",
-    route: "/audiocall",
+    name: "Аудиовызов",
+    route: "/startgame/audiocall/book",
   },
   {
-    name: "Memory game",
-    route: "/game_memory_start/book",
+    name: "Карточки",
+    route: "/startgame/memory/book",
   },
   {
     name: "Sprint",
