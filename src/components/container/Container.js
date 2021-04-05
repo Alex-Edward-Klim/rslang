@@ -39,6 +39,7 @@ const Container = () => {
             <Route path="/getdataforgame/:game/:launchmodule" render={props => <GetDataForGame {...props} />} />
             <Route path="/memory/:launchmodule" exact render={props => <GameMemory {...props} />} />
             <Route path="/sprint/:launchmodule" exact render={props => <Sprint {...props} />} />
+            <Route path="/audiocall/:launchmodule" exact render={props => <Audiocall {...props} />} />
             <Route path="*" render={() => <Redirect to="/" />} />
           </Switch>
         </div>

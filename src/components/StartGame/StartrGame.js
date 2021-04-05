@@ -10,6 +10,7 @@ import GroupFlags from '../elTextBook/groupFlags/GroupFlags.jsx';
 
 import DescriptionMemory from '../GameMemory/Description/Description';
 import DescriptionSprint from '../sprint/Description/Description.jsx';
+import DescriptionAudiocall from '../audiocall/Description/Description';
 
 const StartGame = () => {
     const { game, launchmodule } = useParams();
@@ -30,7 +31,7 @@ const StartGame = () => {
     }
     // конец блока индивидуальных настроек для memory
 
-    const controlURLgame = game === "memory" || game === "sprint"; // еще две игры
+    const controlURLgame = game === "memory" || game === "sprint" || game === "audiocall"; // еще две игры
     const controlURLlaunchmodule = launchmodule === "nav" || launchmodule === "book" || launchmodule === "compound" || launchmodule === "deleted";
     if (!controlURLgame || !controlURLlaunchmodule) return <Redirect to={`/`} />;
 
@@ -40,6 +41,7 @@ const StartGame = () => {
                 <div className={s.container}>
                     { game === "memory" ? <DescriptionMemory /> : null}
                     { game === "sprint" ? <DescriptionSprint /> : null}
+                    { game === "audiocall" ? <DescriptionAudiocall /> : null}
 
                     { game === "memory" ? 
                         <div className={s.control}>
