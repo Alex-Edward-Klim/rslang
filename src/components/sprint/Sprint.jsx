@@ -323,8 +323,8 @@ const Sprint = props => {
       )}
       {/* TODO: uncomment */}
       {isTimeUp && (<StopGame propsStop={{
-        // otvetCorrect: rightAnswerList,
-        // otvetWrong: wrongAnswerList,
+        otvetCorrect: rightAnswerList,
+        otvetWrong: wrongAnswerList,
         game: "sprint",
         launchmodule: props.launchmodule,
     }} />)}
