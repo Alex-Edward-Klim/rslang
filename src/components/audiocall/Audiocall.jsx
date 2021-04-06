@@ -5,18 +5,9 @@ import rigthAnswerBtn from "../../images/icons/rigthAnswer.png";
 import wrongAnswerBtn from "../../images/icons/wrongAnswer.png";
 
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
 
-// TODO: если не авторизован, хранить результат игры в локал сторейдж, если авторизован пост запрос при каждом ответе.
-
-const Audiocall = () => {
-  //TODO: get URL from props
-  const apiUrl = "https://rslang-server-2021.herokuapp.com";
-  const wordListUrl = `${apiUrl}/words`;
-
-  const [wordList, setWordList] = useState();
+const Audiocall = props => {
   const [currentRound, setCurrentRound] = useState(0);
-  // const [rigthAnswerID, setRigthAnswerID] = useState();
   const [rigthAnswer, setRigthAnswer] = useState();
   const [usedID, setUsedID] = useState([]);
   const [currentOptions, setCurrentOptions] = useState([]);
@@ -28,6 +19,13 @@ const Audiocall = () => {
   const audioPlayer = useRef(null);
   const optionListRef = useRef(null);
 
+  const propsData = props.location.propsData;
+  let wordList = null;
+  if (propsData) {
+    wordList = propsData.data;
+  }
+  const apiUrl = "https://rslang-server-2021.herokuapp.com";
+  
   const shuffle = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -68,7 +66,6 @@ const Audiocall = () => {
     const rigthOption = currentWordList[0];
 
     const rigthOptionID = rigthOption.id;
-    // setRigthAnswerID(rigthOptionID);
     setRigthAnswer(rigthOption);
 
     const localCurrentOptions = []
@@ -108,8 +105,7 @@ const Audiocall = () => {
   };
 
   const checkWord = (e) => {
-    const rigthAnswerID = rigthAnswer.id;
-
+    const rigthAnswerID = rigthAnswer._id;
     if (e.currentTarget.id === rigthAnswerID) {
       // console.log("ВЕРНО");
 
@@ -141,6 +137,7 @@ const Audiocall = () => {
       }
     }
 
+
     rigthAnswerNode.children[0].classList.remove("audiocall__option-list__item__off");
     rigthAnswerNode.children[2].classList.add("audiocall__option-list__item__off");
 
@@ -159,7 +156,7 @@ const Audiocall = () => {
     } else if (!((e.key) < 6) || ((e.key) === "0")) {
       return
     }
-    const rigthAnswerID = rigthAnswer.id;
+    const rigthAnswerID = rigthAnswer._id;
     const currentOptionList = optionListRef.current.childNodes;
     const selectedOption = currentOptionList[e.key - 1];
     let rigthAnswerOption;
@@ -231,14 +228,6 @@ const Audiocall = () => {
   }
 
   useEffect(() => {
-    const currentUrl = wordListUrl;
-    axios.get(currentUrl).then((resp) => {
-      const allWords = resp.data;
-      setWordList(allWords);
-    });
-  }, []);
-
-  useEffect(() => {
     renderGame();
   }, [wordList, currentRound]);
 
@@ -246,17 +235,10 @@ const Audiocall = () => {
     sayWord();
   }, [rigthAnswer]);
 
-  // TODO: implement
   useEffect(() => {
-    if (wordList) {
-      if (wordList.length < 20) {
-        // addWords() допушить слова в список слов
-      }
-    }
-  }, [wordList]);
-
-  useEffect(() => {
-    document.addEventListener('keydown', checkWordWithKeyboard);
+    setTimeout(() => {
+      document.addEventListener('keydown', checkWordWithKeyboard);
+    }, 500);
   }, [rigthAnswer])
 
   if (!wordList || wordList.length === 0) return <p>Загрузка...</p>;
@@ -266,7 +248,7 @@ const Audiocall = () => {
       <li
         className="audiocall__option-list__item"
         key={i}
-        id={el.id}
+        id={el._id}
         onClick={!isWordChecked ? checkWord : undefined} 
       >
         <img
@@ -303,7 +285,7 @@ const Audiocall = () => {
       Далее
     </p>
   );
-
+  
   return (
     <>
       <header className="audiocall__header">
