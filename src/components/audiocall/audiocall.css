@@ -10,6 +10,11 @@
     align-items: center;
     padding: 0 30px;
     /* height: 90vh; */
+    margin-top: 8vh;
+}
+.audiocall__fullscreen{
+    height: 100vh;
+    background-color: #F8FBFE ;
 }
 .audiocall__container {
     width: 1140px;
