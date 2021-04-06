@@ -321,7 +321,6 @@ const Sprint = props => {
           {screen.active ? fullScreenContentPage : contentPage}
         </FullScreen>
       )}
-      {/* TODO: uncomment */}
       {isTimeUp && (<StopGame propsStop={{
         otvetCorrect: rightAnswerList,
         otvetWrong: wrongAnswerList,
