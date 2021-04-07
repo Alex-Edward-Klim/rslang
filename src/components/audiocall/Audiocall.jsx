@@ -125,7 +125,13 @@ const Audiocall = (props) => {
   };
 
   const checkWord = (e) => {
-    const rigthAnswerID = rigthAnswer._id;
+    let rigthAnswerID = null;
+    if (userId) {
+      rigthAnswerID = rigthAnswer._id;
+    } else {
+      rigthAnswerID = rigthAnswer.id;
+    }
+
     if (e.currentTarget.id === rigthAnswerID) {
       countAnswer(true);
     } else if (e.currentTarget.innerHTML === "Не знаю") {
@@ -169,10 +175,18 @@ const Audiocall = (props) => {
   const checkWordWithKeyboard = (e) => {
     if (!rigthAnswer) {
       return;
+
     } else if (!(e.key < 6) || e.key === "0") {
       return;
     }
-    const rigthAnswerID = rigthAnswer._id;
+
+    let rigthAnswerID = null;
+    if (userId) {
+      rigthAnswerID = rigthAnswer._id;
+    } else {
+      rigthAnswerID = rigthAnswer.id;
+    }
+
     const currentOptionList = optionListRef.current.childNodes;
     const selectedOption = currentOptionList[e.key - 1];
     let rigthAnswerOption;
@@ -261,14 +275,12 @@ const Audiocall = (props) => {
     }, 500);
   }, [rigthAnswer]);
 
-  // if (!wordList || wordList.length === 0) return <p>Загрузка...</p>;
-
   const optionList = currentOptions.map((el, i) => {
     return (
       <li
         className="audiocall__option-list__item"
         key={i}
-        id={el._id}
+        id={userId ? el._id : el.id}
         onClick={!isWordChecked ? checkWord : undefined}
       >
         <img
