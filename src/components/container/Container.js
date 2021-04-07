@@ -43,7 +43,7 @@ const Container = () => {
             <Route path="*" render={() => <Redirect to="/" />} />
           </Switch>
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </BrowserRouter>
     </>
   );

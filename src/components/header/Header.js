@@ -135,17 +135,17 @@ function Header() {
     />
   );
 
-  return (
-    <header>
-      <div className={styles.headerContainer}>
-        {width < 1197 ? burgerMenuImg : false}
-        <span className={styles.headerTitle}>RS Lang</span>
-        {isBurgerMenuShow && burgerMenu}
-        {width >= 1197 ? menuMain : false}
-        <LoginStatus />
-      </div>
-    </header>
-  );
-}
+    return (
+        <header>
+            <div className={styles.headerContainer}>
+                {width < 1217 ? burgerMenuImg : false}
+                <span className={styles.headerTitle}>RS Lang</span>
+                {isBurgerMenuShow && burgerMenu}
+                {width >= 1217 ? menuMain : false}
+                <LoginStatus />
+            </div>
+        </header>
+        );
+    }
 
 export default Header;

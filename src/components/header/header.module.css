@@ -130,7 +130,7 @@ header{
 .headerUserPhoto{
     padding-right: 10px;
 }
-@media (max-width: 1197px) {
+@media (max-width: 1217px) {
     .headerContainer{
         display: flex;
         justify-content: space-around;
