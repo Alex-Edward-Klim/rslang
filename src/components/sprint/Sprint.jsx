@@ -19,11 +19,10 @@ import StopGame from "../StopGame/StopGame";
 import { useSelector } from "react-redux";
 import { getUserDataFromState } from '../../redux/selectors';
 import handlerWords from '../../Utils/handlerWords';
+import SprintAudio from "./SprintAudio/SprintAudio";
 
 const Sprint = props => {
-  // TODO: вынести в компоненты: audio,
-  // const [isAudioOn, setIsAudioOn] = useState(false);
-
+  const [isAudioOn, setIsAudioOn] = useState(false);
   const [score, setScore] = useState(0);
   const [pointsPerWord, setPointsPerWord] = useState(10);
   const [isTimeUp, setIsTimeUp] = useState(false);
@@ -234,11 +233,12 @@ const Sprint = props => {
       <div className="sprint__header">
         <SprintTimer setIsTimeUp={setIsTimeUp} />
         <div className="sprint__header__btns">
-          {/* <img
+          <img
         alt="sound btn"
         className="sprint__header__btns__audio"
-        src={audioOff}
-      /> */}
+        onClick={() => setIsAudioOn(!isAudioOn)}
+        src={isAudioOn ? audioOn : audioOff}
+      />
           <img
             alt="full screen btn"
             className="sprint__header__btns__exit"
@@ -328,6 +328,7 @@ const Sprint = props => {
           {screen.active ? fullScreenContentPage : contentPage}
         </FullScreen>
       )}
+      {isAudioOn && <SprintAudio mainWord={mainWord} />}
     </>
   );
 };
