@@ -102,9 +102,13 @@ const Sprint = props => {
     }
 
     setTimeout(() => {
+      if (indicatorTrue.current === null) {
+        return
+      }
       indicatorTrue.current.classList.remove(currentClass);
       indicatorFalse.current.classList.remove(currentClass);
     }, 500);
+
   };
 
   const sendWord = (isTrueAnswer) => {
@@ -183,6 +187,9 @@ const Sprint = props => {
   }, [wordList, round]);
 
   useEffect(() => {
+    if (isTimeUp) {
+      return
+    }
     const checkAnswerWithKeyboard = ({ key }) => {
       if (key === "ArrowLeft") {
         checkAnswerFalse();
@@ -196,7 +203,7 @@ const Sprint = props => {
     return () => {
       window.removeEventListener("keydown", checkAnswerWithKeyboard);
     };
-  }, [isCorrectTranslation, round]);
+  }, [isCorrectTranslation, round, isTimeUp]);
 
   const bird = (
     <img

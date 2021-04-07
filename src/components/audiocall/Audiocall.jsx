@@ -379,7 +379,7 @@ const Audiocall = (props) => {
   return (
     <>
     {isGameOver ? gameOverContent : wordList === null ? (
-      <Redirect to={`/startgame/sprint/${launchmodule}`} />
+      <Redirect to={`/startgame/audiocall/${launchmodule}`} />
     ) : (
       <FullScreen handle={screen}>
         {screen.active ? currentMainContent : mainContent}
