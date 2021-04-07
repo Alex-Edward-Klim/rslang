@@ -19,11 +19,10 @@ import StopGame from "../StopGame/StopGame";
 import { useSelector } from "react-redux";
 import { getUserDataFromState } from '../../redux/selectors';
 import handlerWords from '../../Utils/handlerWords';
+import SprintAudio from "./SprintAudio/SprintAudio";
 
 const Sprint = props => {
-  // TODO: вынести в компоненты: audio,
-  // const [isAudioOn, setIsAudioOn] = useState(false);
-
+  const [isAudioOn, setIsAudioOn] = useState(false);
   const [score, setScore] = useState(0);
   const [pointsPerWord, setPointsPerWord] = useState(10);
   const [isTimeUp, setIsTimeUp] = useState(false);
@@ -103,9 +102,13 @@ const Sprint = props => {
     }
 
     setTimeout(() => {
+      if (indicatorTrue.current === null) {
+        return
+      }
       indicatorTrue.current.classList.remove(currentClass);
       indicatorFalse.current.classList.remove(currentClass);
     }, 500);
+
   };
 
   const sendWord = (isTrueAnswer) => {
@@ -184,6 +187,9 @@ const Sprint = props => {
   }, [wordList, round]);
 
   useEffect(() => {
+    if (isTimeUp) {
+      return
+    }
     const checkAnswerWithKeyboard = ({ key }) => {
       if (key === "ArrowLeft") {
         checkAnswerFalse();
@@ -197,7 +203,7 @@ const Sprint = props => {
     return () => {
       window.removeEventListener("keydown", checkAnswerWithKeyboard);
     };
-  }, [isCorrectTranslation, round]);
+  }, [isCorrectTranslation, round, isTimeUp]);
 
   const bird = (
     <img
@@ -234,11 +240,12 @@ const Sprint = props => {
       <div className="sprint__header">
         <SprintTimer setIsTimeUp={setIsTimeUp} />
         <div className="sprint__header__btns">
-          {/* <img
+          <img
         alt="sound btn"
         className="sprint__header__btns__audio"
-        src={audioOff}
-      /> */}
+        onClick={() => setIsAudioOn(!isAudioOn)}
+        src={isAudioOn ? audioOn : audioOff}
+      />
           <img
             alt="full screen btn"
             className="sprint__header__btns__exit"
@@ -312,21 +319,23 @@ const Sprint = props => {
     <div className="sprint__fullscreen">{contentPage}</div>
   );
 
+  const gameOverContent = (<StopGame propsStop={{
+    otvetCorrect: rightAnswerList,
+    otvetWrong: wrongAnswerList,
+    game: "sprint",
+    launchmodule: props.launchmodule,
+  }} />);
+
   return (
     <>
-      {wordList === null ? (
+      {isTimeUp ? gameOverContent : wordList === null ? (
         <Redirect to={`/startgame/sprint/${launchmodule}`} />
       ) : (
         <FullScreen handle={screen}>
           {screen.active ? fullScreenContentPage : contentPage}
         </FullScreen>
       )}
-      {isTimeUp && (<StopGame propsStop={{
-        otvetCorrect: rightAnswerList,
-        otvetWrong: wrongAnswerList,
-        game: "sprint",
-        launchmodule: props.launchmodule,
-    }} />)}
+      {isAudioOn && <SprintAudio mainWord={mainWord} />}
     </>
   );
 };
