@@ -3,7 +3,8 @@ body {
   background-color: #F8FBFE;
 }
 .mainPage {
-  margin: 5px 170px;
+  margin: 10px 170px;
+  padding-bottom: 0px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,8 +73,8 @@ body {
   margin: 1.5% 2%;
 }
 .profilePhoto{
-  width: 246px;
-  height: 214px;
+  width: 350px;
+  height: 250px;
   border-radius: 50px;
 }
 .infoPerson{
@@ -162,8 +163,8 @@ body {
     height: 55px;
   }
   .profilePhoto{
-    width: 175px;
-    height: 163px;
+    width: 300px;
+    height: 153px;
   }
   .infoPerson{
     max-width: 720px;
