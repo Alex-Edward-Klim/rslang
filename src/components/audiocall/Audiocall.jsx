@@ -369,7 +369,7 @@ const Audiocall = (props) => {
   const gameOverContent = (<StopGame propsStop={{
       otvetCorrect: rightAnswerList,
       otvetWrong: wrongAnswerList,
-      game: "sprint",
+      game: "audiocall",
       launchmodule: props.launchmodule,
     }} />);
 
@@ -378,12 +378,14 @@ const Audiocall = (props) => {
 
   return (
     <>
-      {wordList === null ? (
-        <Redirect to={`/startgame/audiocall/${launchmodule}`} />
-      ) : isGameOver ? gameOverContent : currentMainContent
-      }
-      
-    </>
+    {isGameOver ? gameOverContent : wordList === null ? (
+      <Redirect to={`/startgame/sprint/${launchmodule}`} />
+    ) : (
+      <FullScreen handle={screen}>
+        {screen.active ? currentMainContent : mainContent}
+      </FullScreen>
+    )}
+  </>
   );
 };
 

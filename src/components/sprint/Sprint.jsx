@@ -312,21 +312,22 @@ const Sprint = props => {
     <div className="sprint__fullscreen">{contentPage}</div>
   );
 
+  const gameOverContent = (<StopGame propsStop={{
+    otvetCorrect: rightAnswerList,
+    otvetWrong: wrongAnswerList,
+    game: "sprint",
+    launchmodule: props.launchmodule,
+  }} />);
+
   return (
     <>
-      {wordList === null ? (
+      {isTimeUp ? gameOverContent : wordList === null ? (
         <Redirect to={`/startgame/sprint/${launchmodule}`} />
       ) : (
         <FullScreen handle={screen}>
           {screen.active ? fullScreenContentPage : contentPage}
         </FullScreen>
       )}
-      {isTimeUp && (<StopGame propsStop={{
-        otvetCorrect: rightAnswerList,
-        otvetWrong: wrongAnswerList,
-        game: "sprint",
-        launchmodule: props.launchmodule,
-    }} />)}
     </>
   );
 };
