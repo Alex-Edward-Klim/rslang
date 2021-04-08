@@ -1,7 +1,7 @@
 export const gameList = [
   {
-    name: "Savannah",
-    route: "/savannah",
+    name: "Саванна",
+    route: "/startgame/savanna/book",
   },
   {
     name: "Аудиовызов",
@@ -19,8 +19,8 @@ export const gameList = [
 
 export const gameListDeleted = [
   {
-    name: "Savannah",
-    route: "/savannah",
+    name: "Саванна",
+    route: "/startgame/savanna/deleted",
   },
   {
     name: "Аудиовызов",
@@ -38,8 +38,8 @@ export const gameListDeleted = [
 
 export const gameListСompound = [
   {
-    name: "Savannah",
-    route: "/savannah",
+    name: "Саванна",
+    route: "/startgame/savanna/compound",
   },
   {
     name: "Аудиовызов",
