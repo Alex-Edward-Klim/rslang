@@ -170,7 +170,7 @@ const GetDataForGame = props => {
         };
     }, []);
 
-    const controlURLgame = game === "memory" || game === "audiocall" || game === "sprint"; // еще одна игра
+    const controlURLgame = game === "memory" || game === "audiocall" || game === "sprint" || game === "savanna";
     const controlURLlaunchmodule = launchmodule === "nav" || launchmodule === "book" || launchmodule === "compound" || launchmodule === "deleted";
     if (!controlURLgame || !controlURLlaunchmodule) return <Redirect to={`/`} />;
     if (!settingsGame) return <Redirect to={`/startgame/${game}/${launchmodule}`} />

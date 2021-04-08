@@ -54,7 +54,7 @@ function Header() {
       <div className={styles.dropdown}>
         <div className={styles.listItem}>Игры</div>
         <ul className={styles.dropdownContent}>
-          <NavLink className={styles.dropdownItem} to="/">
+          <NavLink className={styles.dropdownItem} to="/startgame/savanna/nav">
             Саванна
           </NavLink>
           <NavLink className={styles.dropdownItem} to="/startgame/audiocall/nav">
