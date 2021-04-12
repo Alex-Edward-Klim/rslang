@@ -188,6 +188,7 @@ header{
 .burgerMenuWrapper{
     position: fixed;
     display: flex;
+    z-index: 1;
     max-width: 200px;
     height: 100%;
     top: 0;
