@@ -71,7 +71,6 @@ function ElTextBook() {
   if (wordsList !== null) {
     let words = [...wordsList];
     if (userId) {
-      // setWordList(prev => prev.filter(word => word?.userWord?.difficulty !== 'deleted_word'))
       words = wordsList.filter(
         (el) => el?.userWord?.difficulty !== "deleted_word"
       );
@@ -82,8 +81,8 @@ function ElTextBook() {
           key={el._id}
           typeOfWords={'textBook'}
           wordElement={el}
-          correct={el?.userWord?.options?.correct_otvet ? el.userWord.optional.correct_otvet : 0}
-          wrong={el?.userWord?.options?.wrong_otvet ? el.userWord.optional.wrong_otvet : 0}
+          correct={el?.userWord?.optional?.correct_otvet ? el.userWord.optional.correct_otvet : 0}
+          wrong={el?.userWord?.optional?.wrong_otvet ? el.userWord.optional.wrong_otvet : 0}
           removeHandler={removeHandler}
         />
       );

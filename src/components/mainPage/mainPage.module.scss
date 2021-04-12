@@ -73,7 +73,7 @@ body {
   margin: 1.5% 2%;
 }
 .profilePhoto{
-  width: 350px;
+  // width: 350px;
   height: 250px;
   border-radius: 50px;
 }
@@ -93,7 +93,7 @@ body {
   font-weight: 300;
   font-style: normal;
   font-family: cursive;
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 16px;
   color: #636363;
 }
@@ -163,8 +163,8 @@ body {
     height: 55px;
   }
   .profilePhoto{
-    width: 300px;
-    height: 153px;
+    // width: 300px;
+    // height: 153px;
   }
   .infoPerson{
     max-width: 720px;
@@ -175,14 +175,14 @@ body {
     line-height: 23px;
   }
   .containerLocation{
-    font-size: 10px;
+    font-size: 14px;
   }
   .containerLocation img{
     padding-top: 0.5%;
     margin-top: 0;
   }
   .containerInfo{
-    font-size: 12px;
+    font-size: 14px;
   }
   .containerInfo img{
     width: 14px;
@@ -193,7 +193,7 @@ body {
     font-size: 15px;
   }
   .aboutPerson{
-    font-size: 13px;
+    font-size: 14px;
     line-height: 15px;
   }
 }
@@ -228,28 +228,30 @@ body {
     height: 34px;
   }
   .personCard{
+    flex-direction: column;
     border-radius: 25px;
     padding: 1.5%;
     margin: 1.5% 2%;
   }
-  .profilePhoto{
-    width: 123px;
-    height: 108px;
-    border-radius: 25px;
-  }
+  // .profilePhoto{
+  //   width: 123px;
+  //   height: 108px;
+  //   border-radius: 25px;
+  // }
   .infoPerson{
     max-width: 500px;
   }
   .infoPerson h4{
     font-size: 19px;
     line-height: 20px;
+    margin-top: 10px;
   }
   .containerLocation{
-    font-size: 8px;
+    font-size: 14px;
     margin-top: 0.2%;
   }
   .containerInfo{
-    font-size: 10px;
+    font-size: 14px;
   }
   .containerInfo img{
     width: 11px;
@@ -257,9 +259,9 @@ body {
   }
   .infoPerson h3{
     font-weight: 600;
-    font-size: 12px;
+    font-size: 14px;
   }
   .aboutPerson{
-    font-size: 10px;
+    font-size: 14px;
   }
 }
