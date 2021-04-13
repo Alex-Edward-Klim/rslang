@@ -7,6 +7,7 @@ import MainPage from "../mainPage/MainPage";
 import StartGame from "../StartGame/StartrGame";
 import GetDataForGame from "../StartGame/GetDataForGame";
 import GameMemory from "../GameMemory/GameMemory";
+import GameSavanna from "../GameSavanna/GameSavanna";
 import Audiocall from "../audiocall/Audiocall";
 import Vocabulary from "../vocabulary/Vocabulary";
 import Footer from "../footer/Footer";
@@ -38,6 +39,7 @@ const Container = () => {
             <Route path="/startgame/:game/:launchmodule" render={() => <StartGame />} />
             <Route path="/getdataforgame/:game/:launchmodule" render={props => <GetDataForGame {...props} />} />
             <Route path="/memory/:launchmodule" exact render={props => <GameMemory {...props} />} />
+            <Route path="/savanna/:launchmodule" exact render={props => <GameSavanna {...props} />} />
             <Route path="/sprint/:launchmodule" exact render={props => <Sprint {...props} />} />
             <Route path="/audiocall/:launchmodule" exact render={props => <Audiocall {...props} />} />
             <Route path="*" render={() => <Redirect to="/" />} />
