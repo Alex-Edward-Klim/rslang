@@ -28,7 +28,7 @@ function MainPage() {
 
       <iframe
         className={styles.video}
-        src="https://www.youtube.com/embed/dybOdWZJvgM"
+        src="https://www.youtube.com/embed/xYeVDBhFTcs"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
