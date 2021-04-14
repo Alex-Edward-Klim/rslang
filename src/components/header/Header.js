@@ -77,7 +77,7 @@ function Header() {
       <NavLink className={styles.listItem} to="/settings">
         Настройки
       </NavLink>
-      <NavLink className={styles.listItem} to="/">
+      <NavLink className={styles.listItem} to="/statistic">
         Статистика
       </NavLink>
     </ul>

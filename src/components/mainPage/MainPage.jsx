@@ -53,17 +53,17 @@ function MainPage() {
 
               <div className={styles.containerInfo}>
                 <img className={styles.locationImg} src={mailImg} />
-                <div>alexklim3221128@gmail.com</div>
+                <a href="mailto:alexklim3221128@gmail.com" target="_blank">alexklim3221128@gmail.com</a>
               </div>
 
               <div className={styles.containerInfo}>
                 <img className={styles.locationImg} src={githubImg} />
-                <div>Alex-Edward-Klim</div>
+                <a href="https://github.com/Alex-Edward-Klim" target="_blank">Alex-Edward-Klim</a>
               </div>
 
               <div className={styles.containerInfo}>
                 <img className={styles.locationImg} src={telegramImg} />
-                <div>Alex-Edward-Klim</div>
+                <a href="https://t.me/Alex_Edward_Klim" target="_blank">Alex_Edward_Klim</a>
               </div>
 
               <h3>Вклад в разработку:</h3>
@@ -83,17 +83,17 @@ function MainPage() {
 
               <div className={styles.containerInfo}>
                 <img className={styles.locationImg} src={mailImg} />
-                <div>AManin63@mail.ru</div>
+                <a href="mailto:AManin63@mail.ru" target="_blank">AManin63@mail.ru</a>
               </div>
 
               <div className={styles.containerInfo}>
                 <img className={styles.locationImg} src={githubImg} />
-                <div>AV-63-dev</div>
+                <a href="https://github.com/AV-63-dev" target="_blank">AV-63-dev</a>
               </div>
 
               <div className={styles.containerInfo}>
                 <img className={styles.locationImg} src={telegramImg} />
-                <div>AnatoliySamara</div>
+                <a href="https://t.me/AnatoliySamara" target="_blank">AnatoliySamara</a>
               </div>
 
               <h3>Вклад в разработку:</h3>
@@ -113,17 +113,17 @@ function MainPage() {
 
               <div className={styles.containerInfo}>
                 <img className={styles.locationImg} src={mailImg} />
-                <div>anyakorytko@mail.ru</div>
+                <a href="mailto:anyakorytko@mail.ru" target="_blank">anyakorytko@mail.ru</a>
               </div>
 
               <div className={styles.containerInfo}>
                 <img className={styles.locationImg} src={githubImg} />
-                <div>korytsa</div>
+                <a href="https://github.com/korytsa" target="_blank">korytsa</a>
               </div>
 
               <div className={styles.containerInfo}>
                 <img className={styles.locationImg} src={telegramImg} />
-                <div>korytkochechka</div>
+                <a href="https://t.me/korytkochechka" target="_blank">korytkochechka</a>
               </div>
 
               <h3>Вклад в разработку:</h3>
@@ -143,17 +143,17 @@ function MainPage() {
 
                   <div className={styles.containerInfo}>
                     <img className={styles.locationImg} src={mailImg} />
-                    <div>yaroslavtrefilov5@gmail.com</div>
+                    <a href="mailto:yaroslavtrefilov5@gmail.com" target="_blank">yaroslavtrefilov5@gmail.com</a>
                   </div>
 
                   <div className={styles.containerInfo}>
                     <img className={styles.locationImg} src={githubImg} />
-                    <div>YaroslavTrefilov</div>
+                    <a href="https://github.com/YaroslavTrefilov" target="_blank">YaroslavTrefilov</a>
                   </div>
 
                   <div className={styles.containerInfo}>
                     <img className={styles.locationImg} src={telegramImg} />
-                    <div>Hearon</div>
+                    <a href="https://t.me/Hearon" target="_blank">Hearon</a>
                   </div>
 
                   <h3>Вклад в разработку:</h3>
@@ -173,17 +173,17 @@ function MainPage() {
 
               <div className={styles.containerInfo}>
                 <img className={styles.locationImg} src={mailImg} />
-                <div>agent250691@yandex.ru</div>
+                <a href="mailto:agent250691@yandex.ru" target="_blank">agent250691@yandex.ru</a>
               </div>
 
               <div className={styles.containerInfo}>
                 <img className={styles.locationImg} src={githubImg} />
-                <div>NachinkaShaurmi</div>
+                <a href="https://github.com/NachinkaShaurmi" target="_blank">NachinkaShaurmi</a>
               </div>
 
               <div className={styles.containerInfo}>
                 <img className={styles.locationImg} src={telegramImg} />
-                <div>YuriyO</div>
+                <a href="https://t.me/YuriyO" target="_blank">YuriyO</a>
               </div>
 
               <h3>Вклад в разработку:</h3>
