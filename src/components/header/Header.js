@@ -7,12 +7,36 @@ import { NavLink } from "react-router-dom";
 import { setWordsGroupAndPage } from "../../redux/wordsGroupAndPage/wordsGroupAndPageActions";
 import { useSelector, useDispatch } from "react-redux";
 import { getWordsGroupAndPageFromState } from "../../redux/selectors";
+import { getUserDataFromState } from '../../redux/selectors';
+import { useHistory } from "react-router-dom";
+import { setUserData } from "../../redux/user/userActions"
 
 function Header() {
+  const [isAuthorized, setIsAuthorized] = useState(null);
   const dispatch = useDispatch();
   const { group, page } = useSelector(getWordsGroupAndPageFromState);
 
   const [isBurgerMenuShow, setIsBurgerMenuShow] = useState(false);
+  const {userId} = useSelector(getUserDataFromState);
+
+  const history = useHistory();
+
+  useEffect(() => {
+  if (userId) {
+    setIsAuthorized(true)
+  } else {
+    setIsAuthorized(false)
+  }
+  }, [userId])
+
+
+  const logout = () => {
+    localStorage.clear()
+    history.push("/");
+    setIsAuthorized(false);
+
+    dispatch(setUserData (''))
+  }
 
   function getWindowDimensions() {
     const { innerWidth: width } = window;
@@ -143,6 +167,7 @@ function Header() {
                 {isBurgerMenuShow && burgerMenu}
                 {width >= 1217 ? menuMain : false}
                 <LoginStatus />
+                {isAuthorized && (<span onClick={logout} className={styles.headerLogout}>Выход</span> )}
             </div>
         </header>
         );
