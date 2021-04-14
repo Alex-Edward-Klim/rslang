@@ -175,7 +175,7 @@ const GetDataForGame = props => {
     if (!controlURLgame || !controlURLlaunchmodule) return <Redirect to={`/`} />;
     if (!settingsGame) return <Redirect to={`/startgame/${game}/${launchmodule}`} />
 
-    console.log(data)
+    // console.log(data)
 
     return (
         <>
