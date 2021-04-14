@@ -323,7 +323,7 @@ const Sprint = props => {
     otvetCorrect: rightAnswerList,
     otvetWrong: wrongAnswerList,
     game: "sprint",
-    launchmodule: props.launchmodule,
+    launchmodule: launchmodule,
   }} />);
 
   return (
