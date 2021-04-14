@@ -1,0 +1,241 @@
+body{
+    margin: 0 auto;
+}
+header{
+    height: 87px;
+    background-color: #F8FBFE;
+    font-family: Roboto;
+    font-style: normal;
+    color: #000D83;
+    padding: 0 calc(20px - (100vw - 100%)) 0 0;
+}
+.headerContainer{
+    max-width: 1457px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 10px;
+    margin: 0 auto;
+}
+.headerTitle{
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 35px;
+}
+.list{
+    list-style-type: none;
+    width: 850px;
+}
+.listItem{
+    margin: 2.3%;
+    font-size: 20px;
+    line-height: 23px;
+    display: inline-block;
+    color: #000D83;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    
+}
+.listItem::after,
+.dropdownItem::after,
+.signIn:after {
+    display: block;
+    content: "";
+    background-color: #000D83;
+    height: 3px;
+    width: 0%;
+    left: 50%;
+    border-radius: 150px;
+    position: absolute;
+    -webkit-transition: width .3s ease-in-out;
+    -moz--transition: width .3s ease-in-out;
+    transition: width .3s ease-in-out;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.listItem:hover:after,
+.listItem:focus:after,
+.dropdownItem:hover:after,
+.dropdownItem:focus:after,
+.signIn:hover:after,
+.signIn:focus:after {
+    width: 100%;
+}
+.dropdownItem:hover:after,
+.dropdownItem:focus:after{
+    width: 60%;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 1.5% ;
+    margin-left: 1.5%;
+}   
+.dropdownContent {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background-color: #ECECEE;
+    width: 180px;
+    height: 146px;
+    margin: 3px 0px 0px -65px;
+    padding-left: 10%;
+    border-radius: 30px;
+    border: solid 2px #00037E;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+.dropdownItem{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    text-decoration: none;
+    padding: 2%;
+    color: #00037E;
+    cursor: pointer;
+}
+.dropdown:hover .dropdownContent {
+    display: flex;
+}
+.signIn{
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 35px;
+    display: inline-block;
+    color: #000D83;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+}
+.signInImg{
+    padding-left: 10px;
+    width: 30px;
+}
+.headerUser{
+    display: flex;
+    align-items: center;
+}
+.headeUserGuest{
+    font-size: 22px;
+    font-weight: 600;
+    color: #000D83;
+    padding-right: 10px;
+}
+.headerUserPhoto{
+    padding-right: 10px;
+}
+.headerLogout {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000D83;
+    cursor: pointer;
+}
+@media (max-width: 1217px) {
+    .headerContainer{
+        display: flex;
+        justify-content: space-around;
+        padding-top: 20px;
+        padding-left: 10px;
+    }
+    .headerTitle{
+        font-weight: medium;
+        font-size: 23px;
+        line-height: 35px;
+    }
+    .signIn{
+        font-weight: medium;
+        font-size: 23px;
+    }
+    .signInImg{
+        padding-left: 8px;
+        width: 25px;
+    }
+    .headeUserGuest{
+        font-size: 20px;
+        padding-right: 10px;
+    }
+    .headerUserPhoto{
+        padding-right: 10px;
+    }
+}
+@media (max-width: 720px) {
+    .headerContainer{
+        display: flex;
+        padding-top: 20px;
+        padding-left: 50px;
+    }
+    .headerTitle{
+        font-weight: medium;
+        font-size: 20px;
+        line-height: 35px;
+    }
+    .signIn{
+        font-weight: medium;
+        font-size: 20px;
+    }
+    .signInImg{
+        padding-left: 8px;
+        width: 20px;
+    }
+    .headeUserGuest{
+        font-size: 18px;
+        padding-right: 8px;
+    }
+    .headerUserPhoto{
+        padding-right: 8px;
+    }
+}
+.burgerMenuWrapper{
+    position: fixed;
+    display: flex;
+    z-index: 1;
+    max-width: 200px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #000d83;
+    border-radius: 0px 30px 30px 0px;
+}
+.menuItem{
+    display: flex;
+    margin-top: 10%;
+    padding-left: 15%;
+    color: #ECECEE;
+    text-decoration: none;
+    font-family: Roboto;
+    font-size: 19px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color .25s ease-in-out;
+}
+.menuItemGame{
+    display: flex;
+    margin-top: 10%;
+    margin-left: 25%;
+    color: #ECECEE;
+    text-decoration: none;
+    font-family: Roboto;
+    font-size: 19px;
+    cursor: pointer;
+    transition: color .25s ease-in-out;
+}
+.menuItemGame:hover,
+.menuItem:hover{
+    color: #acacac;
+}
+.burgerClose{
+    margin-top: 14%;
+    margin-right: 10%;
+    height: 17px;
+    cursor: pointer;
+}
+.burgerImg{
+    height: 32px;
+    cursor: pointer;
+}

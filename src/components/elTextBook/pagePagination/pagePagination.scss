@@ -1,0 +1,38 @@
+.page-pagination {
+  // margin-top: 10px;
+  margin-bottom: 16px;
+  font-size: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  &__block {
+    padding: 16px 26px;
+    border-radius: 50%;
+    border: none;
+    background-color: #74E38C;
+    &.disable {
+      background-color: #888;
+    }
+  }
+  .left, .right {
+    padding: 14px 14px 8px 14px;
+    outline: 0;
+  }
+  .left:not(.disable), .right:not(.disable) {
+    cursor: pointer;
+    img {
+      transition: .8s;
+    }
+    :hover {
+      transform: scale(1.2);
+    }
+  }
+  .number {
+    text-align: center;
+    border-radius: 30px;
+    min-width: 90px;
+  }
+}
+

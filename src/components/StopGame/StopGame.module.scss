@@ -1,0 +1,54 @@
+@import "../../extends.scss";
+
+.stopWraper {
+    width: 50vw;
+    min-height: 40vh;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffffff;
+    border: 2px solid $colorBtn_GameStart;
+    border-radius: 25px;
+    padding: 10px 0 20px;
+
+    h3 {
+        color: $colorText_GameStart;
+        font-size: 30px;
+        line-height: 40px;
+        font-weight: bold;
+        margin: 5px 0;
+        text-align: center;
+    }
+
+    .correct,
+    .wrong {
+        height: 40px;
+        border-radius: 20px;
+        color: wheat;
+    }
+
+    .correct {        
+        background-color: green;
+    }
+
+    .wrong {
+        background-color: red;
+    }
+
+    .wraper {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+
+
+    .close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 35px;
+        line-height: 1;
+        color: black;
+    }
+}

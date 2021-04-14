@@ -1,0 +1,53 @@
+.vocabulary {
+  
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.typeWord {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 20px auto;
+  flex-wrap: wrap;
+}
+
+.typeWordEl {
+  text-align: center;
+  font-size: 22px;
+  padding: 10px 20px;
+  min-width: 120px;
+  background-color: white;
+  border-radius: 15px;
+  color: #000D83;
+  cursor: pointer;
+  border: solid 2px #000D83;
+  &.active {
+    background-color: #000D83;
+    color: white;
+  }
+}
+
+.wordCards {
+  margin-bottom: 10px;
+}
+
+.pageStatistic {
+  font-size: 22px;
+  color: #000D83;
+  margin: 20px auto;
+  line-height: 28px;
+  list-style-type: none;
+}

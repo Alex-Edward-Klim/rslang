@@ -1,0 +1,329 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PagePagination React-Redux Component should render with given state from Redux store 1`] = `
+<div
+  className="page-pagination"
+>
+  <button
+    className="page-pagination__block left disable"
+    disabled={true}
+    onClick={[Function]}
+  >
+    <img
+      alt=""
+      src="arrowL.png"
+      width="30"
+    />
+  </button>
+  <div
+    className="page-pagination__block  number"
+  >
+    1
+  </div>
+  <button
+    className="page-pagination__block right"
+    disabled={false}
+    onClick={[Function]}
+  >
+    <img
+      alt=""
+      src="arrowR.png"
+      width="30"
+    />
+  </button>
+</div>
+`;
+
+exports[`Snapshot component Footer 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <footer
+        class="footer"
+      >
+        <div
+          class="footerContainer"
+        >
+          <a
+            class="footerLogo"
+            href="https://rs.school/js/"
+          >
+            <img
+              alt="rs school"
+              class="footerLogoImg"
+              src="rs_school_js.svg"
+            />
+          </a>
+          <p
+            class="footerAuthors"
+          >
+            <a
+              href="https://github.com/Alex-Edward-Klim"
+            >
+              <span>
+                Алексей Климовской
+              </span>
+            </a>
+            ,
+            <a
+              href="https://github.com/korytsa"
+            >
+              <span>
+                 Анна Корытько
+              </span>
+            </a>
+            ,
+            <a
+              href="https://github.com/YaroslavTrefilov"
+            >
+              <span>
+                 Ярослав Трефилов
+              </span>
+            </a>
+            ,
+            <a
+              href="https://github.com/NachinkaShaurmi"
+            >
+              <span>
+                 Юрий Олейник
+              </span>
+            </a>
+            ,
+            <a
+              href="https://github.com/AV-63-dev"
+            >
+              <span>
+                 Анатолий Манин
+              </span>
+            </a>
+          </p>
+          <a
+            class="footerRss"
+            href="https://rs.school/js/"
+          >
+            <p>
+              RS School
+            </p>
+            <p>
+              2021
+            </p>
+          </a>
+        </div>
+      </footer>
+    </div>
+  </body>,
+  "container": <div>
+    <footer
+      class="footer"
+    >
+      <div
+        class="footerContainer"
+      >
+        <a
+          class="footerLogo"
+          href="https://rs.school/js/"
+        >
+          <img
+            alt="rs school"
+            class="footerLogoImg"
+            src="rs_school_js.svg"
+          />
+        </a>
+        <p
+          class="footerAuthors"
+        >
+          <a
+            href="https://github.com/Alex-Edward-Klim"
+          >
+            <span>
+              Алексей Климовской
+            </span>
+          </a>
+          ,
+          <a
+            href="https://github.com/korytsa"
+          >
+            <span>
+               Анна Корытько
+            </span>
+          </a>
+          ,
+          <a
+            href="https://github.com/YaroslavTrefilov"
+          >
+            <span>
+               Ярослав Трефилов
+            </span>
+          </a>
+          ,
+          <a
+            href="https://github.com/NachinkaShaurmi"
+          >
+            <span>
+               Юрий Олейник
+            </span>
+          </a>
+          ,
+          <a
+            href="https://github.com/AV-63-dev"
+          >
+            <span>
+               Анатолий Манин
+            </span>
+          </a>
+        </p>
+        <a
+          class="footerRss"
+          href="https://rs.school/js/"
+        >
+          <p>
+            RS School
+          </p>
+          <p>
+            2021
+          </p>
+        </a>
+      </div>
+    </footer>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Snapshot component GroupFlags 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="textbook-flag"
+      >
+        <div
+          class="textbook-flag__area color-1"
+        />
+        <div
+          class="textbook-flag__number"
+        >
+          2
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="textbook-flag"
+    >
+      <div
+        class="textbook-flag__area color-1"
+      />
+      <div
+        class="textbook-flag__number"
+      >
+        2
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
