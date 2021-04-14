@@ -382,11 +382,10 @@ const Audiocall = (props) => {
       otvetCorrect: rightAnswerList,
       otvetWrong: wrongAnswerList,
       game: "audiocall",
-      launchmodule: props.launchmodule,
+      launchmodule:launchmodule,
     }} />);
 
   const currentMainContent = screen.active ? (<div className="audiocall__fullscreen">{mainContent}</div>) : mainContent
-
 
   return (
     <>
