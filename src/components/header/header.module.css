@@ -130,6 +130,12 @@ header{
 .headerUserPhoto{
     padding-right: 10px;
 }
+.headerLogout {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000D83;
+    cursor: pointer;
+}
 @media (max-width: 1217px) {
     .headerContainer{
         display: flex;
